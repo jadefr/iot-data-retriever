@@ -1,5 +1,6 @@
 package dao;
 
+import com.google.gson.Gson;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.query.*;
 
@@ -7,9 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SolcastSPARQL {
+
     private static final String PATH = "C:\\";
 
-    public static ArrayList getSolcastFromOntology() throws IOException {
+    public static ArrayList<String> getSolcastFromOntology() throws IOException {
 
         OntModel ontModel = OntologyAccess.loadOntologyModel(PATH, "oboe_wcm_integrated.rdf");
 
@@ -42,7 +44,7 @@ public class SolcastSPARQL {
         QueryExecution qexec = QueryExecutionFactory.create(consulta, dataset);// Executando a consulta e obtendo o resultado
         ResultSet resultado = qexec.execSelect();
 
-        ArrayList resultsList = new ArrayList<>();
+        ArrayList<String> resultsList = new ArrayList<>();
         while (resultado.hasNext()) {
             QuerySolution next = resultado.next();
             String result = null;
@@ -52,6 +54,10 @@ public class SolcastSPARQL {
             resultsList.add(result);
         }
 
+/*        Gson gson = new Gson();
+        String resultJson = gson.toJson(resultsList);
+        return resultJson;
+*/
         return resultsList;
     }
 }

@@ -25,11 +25,6 @@
     <terms:description xml:lang="en">This ontology is based on the SSN Ontology by the W3C Semantic Sensor Networks Incubator Group (SSN-XG), together with considerations from the W3C/OGC Spatial Data on the Web Working Group.</terms:description>
     <rdfs:comment>This ontology provides the core OBOE modeling constructs.</rdfs:comment>
     <terms:title xml:lang="en">Sensor, Observation, Sample, and Actuator (SOSA) Ontology</terms:title>
-    <terms:creator>
-      <foaf:Agent>
-        <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
-      </foaf:Agent>
-    </terms:creator>
     <rdfs:label>oboe</rdfs:label>
     <terms:license rdf:resource="http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document"/>
     <vann:preferredNamespaceUri>http://www.w3.org/ns/sosa/</vann:preferredNamespaceUri>
@@ -39,6 +34,11 @@
     >2017-04-17</terms:created>
     <terms:license rdf:resource="http://www.opengeospatial.org/ogc/Software"/>
     <rdfs:label>OBOE Characteristics</rdfs:label>
+    <terms:creator>
+      <foaf:Agent>
+        <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
+      </foaf:Agent>
+    </terms:creator>
     <ns:license rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
     >http://creativecommons.org/licenses/by/3.0/</ns:license>
     <vann:preferredNamespacePrefix>ssn</vann:preferredNamespacePrefix>
@@ -49,12 +49,12 @@
     <rdfs:comment>This ontology contains general terms for (physical) characteristics that are measured either quantitatively or qualitatively.</rdfs:comment>
     <terms:rights>Copyright 2017 W3C/OGC.</terms:rights>
     <rdfs:comment>This ontology contains general terms that are common across OBOE extensions.  It extends the OBOE Core model by importing ontologies specific to measurement characteristics, measurement standards, spatial entities, temporal entities, biological taxa, and anatomical entities.</rdfs:comment>
+    <owl:versionInfo>Version 1.2</owl:versionInfo>
     <terms:creator>
       <foaf:Agent>
         <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
       </foaf:Agent>
     </terms:creator>
-    <owl:versionInfo>Version 1.2</owl:versionInfo>
     <owl:versionInfo xml:lang="en">New modular version of the SSN ontology. 
 
 This ontology was originally developed in 2009-2011 by the W3C Semantic Sensor Networks Incubator Group (SSN-XG). For more information on the group's activities see: http://www.w3.org/2005/Incubator/ssn/. The ontology was revised and modularized in 2015-2017 by the W3C/OGC Spatial Data on the Web Working Group, see: https://www.w3.org/2015/spatial/wiki/Semantic_Sensor_Network_Ontology. 
@@ -194,73 +194,6 @@ In particular, (a) the scope is extended to include actuation and sampling; (b) 
   <owl:Class rdf:about="http://www.w3.org/ns/sosa/Observation">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://www.w3.org/ns/sosa/Procedure"/>
-        </owl:allValuesFrom>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/usedProcedure"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/phenomenonTime"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:label xml:lang="en">Observation</rdfs:label>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://www.w3.org/ns/sosa/ObservableProperty"/>
-        </owl:allValuesFrom>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/observedProperty"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://www.w3.org/ns/sosa/Result"/>
-        </owl:allValuesFrom>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/hasResult"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:minCardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/hasResult"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://www.w3.org/ns/sosa/FeatureOfInterest"/>
-        </owl:allValuesFrom>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/hasFeatureOfInterest"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:isDefinedBy>
-      <j.2:Vocabulary rdf:about="http://www.w3.org/ns/sosa/">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-      </j.2:Vocabulary>
-    </rdfs:isDefinedBy>
-    <skos:example xml:lang="en">The activity of estimating the intensity of an Earthquake using the Mercalli intensity scale is an Observation as is measuring the moment magnitude, i.e., the energy released by said earthquake.</skos:example>
-    <rdfs:comment xml:lang="en">Act of carrying out an (Observation) Procedure to estimate or calculate a value of a property of a FeatureOfInterest. Links to a Sensor to describe what made the Observation and how; links to an ObservableProperty to describe what the result is an estimate of, and to a FeatureOfInterest to detail what that property was associated with.</rdfs:comment>
-    <skos:definition xml:lang="en">Act of carrying out an (Observation) Procedure to estimate or calculate a value of a property of a FeatureOfInterest. Links to a Sensor to describe what made the Observation and how; links to an ObservableProperty to describe what the result is an estimate of, and to a FeatureOfInterest to detail what that property was associated with.</skos:definition>
-    <rdfs:subClassOf>
-      <owl:Restriction>
         <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:cardinality>
         <owl:onProperty>
@@ -270,11 +203,21 @@ In particular, (a) the scope is extended to include actuation and sampling; (b) 
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/hasFeatureOfInterest"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Observation</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
         <owl:allValuesFrom>
-          <owl:Class rdf:about="http://www.w3.org/ns/ssn/Stimulus"/>
+          <owl:Class rdf:about="http://www.w3.org/ns/sosa/Result"/>
         </owl:allValuesFrom>
         <owl:onProperty>
-          <owl:FunctionalProperty rdf:about="http://www.w3.org/ns/ssn/wasOriginatedBy"/>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/hasResult"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -288,12 +231,18 @@ In particular, (a) the scope is extended to include actuation and sampling; (b) 
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:isDefinedBy>
+      <j.2:Vocabulary rdf:about="http://www.w3.org/ns/sosa/">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </j.2:Vocabulary>
+    </rdfs:isDefinedBy>
+    <skos:example xml:lang="en">The activity of estimating the intensity of an Earthquake using the Mercalli intensity scale is an Observation as is measuring the moment magnitude, i.e., the energy released by said earthquake.</skos:example>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:cardinality>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeBySensor"/>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/hasResult"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -306,6 +255,27 @@ In particular, (a) the scope is extended to include actuation and sampling; (b) 
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">Act of carrying out an (Observation) Procedure to estimate or calculate a value of a property of a FeatureOfInterest. Links to a Sensor to describe what made the Observation and how; links to an ObservableProperty to describe what the result is an estimate of, and to a FeatureOfInterest to detail what that property was associated with.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/phenomenonTime"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.w3.org/ns/sosa/ObservableProperty"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/observedProperty"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <skos:definition xml:lang="en">Act of carrying out an (Observation) Procedure to estimate or calculate a value of a property of a FeatureOfInterest. Links to a Sensor to describe what made the Observation and how; links to an ObservableProperty to describe what the result is an estimate of, and to a FeatureOfInterest to detail what that property was associated with.</skos:definition>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
@@ -320,7 +290,37 @@ In particular, (a) the scope is extended to include actuation and sampling; (b) 
         <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:cardinality>
         <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeBySensor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.w3.org/ns/sosa/FeatureOfInterest"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/hasFeatureOfInterest"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.w3.org/ns/sosa/Procedure"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/usedProcedure"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.w3.org/ns/ssn/Stimulus"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.w3.org/ns/ssn/wasOriginatedBy"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -467,20 +467,6 @@ In particular, (a) the scope is extended to include actuation and sampling; (b) 
   </owl:Class>
   <owl:Class rdf:about="http://www.w3.org/ns/sosa/Procedure">
     <skos:note xml:lang="en">Many observations may be created via the same Procedure, the same way as many tables are assembled using the same instructions (as information objects, not their concrete realization).</skos:note>
-    <skos:definition xml:lang="en">A workflow, protocol, plan, algorithm, or computational method specifying how to make an Observation, create a Sample, or make a change to the state of the world (via an Actuator). A Procedure is re-usable, and might be involved in many Observations, Samplings, or Actuations. It explains the steps to be carried out to arrive at reproducible results.</skos:definition>
-    <rdfs:label xml:lang="en">Procedure</rdfs:label>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://www.w3.org/ns/ssn/Input"/>
-        </owl:allValuesFrom>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/hasInput"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <skos:example xml:lang="en">The measured wind speed differs depending on the height of the sensor above the surface, e.g., due to friction. Consequently, procedures for measuring wind speed define a standard height for anemometers above ground, typically 10m for meteorological measures and 2m in Agrometeorology. This definition of height, sensor placement, and so forth are defined by the Procedure.</skos:example>
-    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/ns/sosa/"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom>
@@ -491,6 +477,10 @@ In particular, (a) the scope is extended to include actuation and sampling; (b) 
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <skos:definition xml:lang="en">A workflow, protocol, plan, algorithm, or computational method specifying how to make an Observation, create a Sample, or make a change to the state of the world (via an Actuator). A Procedure is re-usable, and might be involved in many Observations, Samplings, or Actuations. It explains the steps to be carried out to arrive at reproducible results.</skos:definition>
+    <rdfs:label xml:lang="en">Procedure</rdfs:label>
+    <skos:example xml:lang="en">The measured wind speed differs depending on the height of the sensor above the surface, e.g., due to friction. Consequently, procedures for measuring wind speed define a standard height for anemometers above ground, typically 10m for meteorological measures and 2m in Agrometeorology. This definition of height, sensor placement, and so forth are defined by the Procedure.</skos:example>
+    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/ns/sosa/"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom>
@@ -502,6 +492,16 @@ In particular, (a) the scope is extended to include actuation and sampling; (b) 
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">A workflow, protocol, plan, algorithm, or computational method specifying how to make an Observation, create a Sample, or make a change to the state of the world (via an Actuator). A Procedure is re-usable, and might be involved in many Observations, Samplings, or Actuations. It explains the steps to be carried out to arrive at reproducible results.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.w3.org/ns/ssn/Input"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/hasInput"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-characteristics.owl#Irradiance">
     <rdfs:comment>Irradiance, radiant emittance, and radiant exitance are radiometry terms for the power per unit area of electromagnetic radiation  at a surface. "Irradiance" is used when the electromagnetic radiation is incident on the surface. "Radiant exitance" or "radiant emittance" is used when the radiation is emerging from the surface. The SI units for all of these quantities are watts per square meter (W/m2) (wikipedia).  All of these quantities characterize the total amount of radiation present, at all frequencies. It is also common to consider each frequency in the spectrum separately. When this is done for radiation incident on a surface, it is called spectral irradiance, and has SI units W/m3, or commonly W·m−2·nm−1.</rdfs:comment>
@@ -1936,32 +1936,13 @@ In particular, (a) the scope is extended to include actuation and sampling; (b) 
   <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#MeasurementType">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:someValuesFrom>
-          <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Characteristic"/>
-        </owl:someValuesFrom>
-        <owl:onProperty>
-          <owl:FunctionalProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#measuresCharacteristic"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Protocol"/>
-    <owl:disjointWith>
-      <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Standard"/>
-    </owl:disjointWith>
-    <rdfs:subClassOf>
-      <owl:Restriction>
         <owl:someValuesFrom rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Protocol"/>
         <owl:onProperty>
           <owl:FunctionalProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#measuresUsingProtocol"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:label xml:lang="en">Measurement Type</rdfs:label>
-    <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#UnitConversion"/>
-    <owl:disjointWith>
-      <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Observation"/>
-    </owl:disjointWith>
-    <rdfs:comment xml:lang="en">A MeasurementType describes the type of a Measurement in which the Measurement would follow the associated Protocol to record the value of the associated Characteristic of the associated Entity using the associated Standard.  Any of these associated properties may be omitted, in which case the MeasurementType is only constrained by the provided associations. A MeasurementType is a hypothetical construct, in that it is not associated with a particular instance of a Measurement.</rdfs:comment>
+    <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Protocol"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:someValuesFrom>
@@ -1973,8 +1954,23 @@ In particular, (a) the scope is extended to include actuation and sampling; (b) 
       </owl:Restriction>
     </rdfs:subClassOf>
     <owl:disjointWith>
-      <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#ObservationCollection"/>
+      <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Standard"/>
     </owl:disjointWith>
+    <rdfs:label xml:lang="en">Measurement Type</rdfs:label>
+    <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#UnitConversion"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Observation"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Characteristic"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#measuresCharacteristic"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:someValuesFrom>
@@ -1985,6 +1981,10 @@ In particular, (a) the scope is extended to include actuation and sampling; (b) 
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A MeasurementType describes the type of a Measurement in which the Measurement would follow the associated Protocol to record the value of the associated Characteristic of the associated Entity using the associated Standard.  Any of these associated properties may be omitted, in which case the MeasurementType is only constrained by the provided associations. A MeasurementType is a hypothetical construct, in that it is not associated with a particular instance of a Measurement.</rdfs:comment>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#ObservationCollection"/>
+    </owl:disjointWith>
   </owl:Class>
   <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DirectNormalIrradiance">
     <rdfs:subClassOf rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#MeasuredCharacteristic"/>
@@ -2529,10 +2529,11 @@ a siemens is Ampere/volt</rdfs:comment>
   <owl:Class rdf:about="http://www.w3.org/ns/sosa/Sensor">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:minCardinality>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.w3.org/ns/sosa/ObservableProperty"/>
+        </owl:allValuesFrom>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/implements"/>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/observes"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -2547,22 +2548,21 @@ a siemens is Ampere/volt</rdfs:comment>
       </owl:Restriction>
     </rdfs:subClassOf>
     <skos:definition xml:lang="en">Device, agent (including humans), or software (simulation) involved in, or implementing, a Procedure. Sensors respond to a stimulus, e.g., a change in the environment, or input data composed from the results of prior Observations, and generate a Result. Sensors can be hosted by Platforms.</skos:definition>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://www.w3.org/ns/sosa/ObservableProperty"/>
-        </owl:allValuesFrom>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/observes"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="http://www.w3.org/ns/sosa/"/>
     <rdfs:label xml:lang="en">Sensor</rdfs:label>
     <rdfs:comment xml:lang="en">Device, agent (including humans), or software (simulation) involved in, or implementing, a Procedure. Sensors respond to a stimulus, e.g., a change in the environment, or input data composed from the results of prior Observations, and generate a Result. Sensors can be hosted by Platforms.</rdfs:comment>
     <skos:example xml:lang="en">Accelerometers, gyroscopes, barometers, magnetometers, and so forth are Sensors that are typically mounted on a modern smart phone (which acts as Platform). Other examples of sensors include the human eyes.</skos:example>
     <rdfs:subClassOf>
       <owl:Class rdf:about="http://www.w3.org/ns/ssn/System"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/implements"/>
+        </owl:onProperty>
+      </owl:Restriction>
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#ApparentTemperatureHighTime">
@@ -3750,14 +3750,6 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
     </owl:disjointWith>
     <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Entity"/>
     <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Protocol"/>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:someValuesFrom rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Entity"/>
-        <owl:onProperty>
-          <owl:FunctionalProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#characteristicFor"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#MeasuredValue"/>
     <rdfs:comment>A characteristic represents a property of an entity that can be measured (e.g., height, length, or color).  A characteristic of an entity is observed through a measurement, which further asserts a value of the characteristic for the entity. A characteristic type (e.g., "height") can be associated with many different entities, whereas an individual characteristic (a particular occurrence of the "height" characteristic) is associated to exactly one entity.</rdfs:comment>
     <owl:disjointWith>
@@ -3767,6 +3759,14 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
       <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Measurement"/>
     </owl:disjointWith>
     <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Observation"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Entity"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#characteristicFor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:label xml:lang="en">Characteristic</rdfs:label>
     <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#MeasurementType"/>
     <owl:disjointWith>
@@ -3843,19 +3843,6 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
   </owl:Class>
   <owl:Class rdf:about="http://www.w3.org/ns/sosa/Actuator">
     <skos:example xml:lang="en">A window actuator for automatic window control, i.e., opening or closing the window.</skos:example>
-    <rdfs:label xml:lang="en">Actuator</rdfs:label>
-    <skos:definition xml:lang="en">A device that is used by, or implements, an (Actuation) Procedure that changes the state of the world.</skos:definition>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:minCardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/implements"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:comment xml:lang="en">A device that is used by, or implements, an (Actuation) Procedure that changes the state of the world.</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/ns/sosa/"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom>
@@ -3867,8 +3854,18 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
-      <owl:Class rdf:about="http://www.w3.org/ns/ssn/System"/>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/implements"/>
+        </owl:onProperty>
+      </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Actuator</rdfs:label>
+    <skos:definition xml:lang="en">A device that is used by, or implements, an (Actuation) Procedure that changes the state of the world.</skos:definition>
+    <rdfs:comment xml:lang="en">A device that is used by, or implements, an (Actuation) Procedure that changes the state of the world.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/ns/sosa/"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom>
@@ -3878,6 +3875,9 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
           <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeActuation"/>
         </owl:onProperty>
       </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.w3.org/ns/ssn/System"/>
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-standards.owl#FootGoldCoastToMeter">
@@ -4901,6 +4901,14 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
     <owl:disjointWith>
       <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Standard"/>
     </owl:disjointWith>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#BaseCharacteristicQualifier"/>
+          <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#CompositeCharacteristicQualifier"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
     <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#ObservationCollection"/>
     <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#UnitConversion"/>
     <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#MeasuredValue"/>
@@ -4910,14 +4918,6 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
     </owl:disjointWith>
     <rdfs:comment>A characteristic qualifier is a derived property of an entity that must be combined with concrete characteristics to be used in a measurement. A qualifier is either a base (atomic) or composite qualifier. As an example, the base qualifier minimum can be combined with a characteristic length to create a minimum length qualified characteristic. A composite qualifer is used to combine multiple qualifiers.</rdfs:comment>
     <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Entity"/>
-    <owl:equivalentClass>
-      <owl:Class>
-        <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#BaseCharacteristicQualifier"/>
-          <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#CompositeCharacteristicQualifier"/>
-        </owl:unionOf>
-      </owl:Class>
-    </owl:equivalentClass>
   </owl:Class>
   <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-standards.owl#MeterSquared">
     <rdfs:subClassOf>
@@ -5406,23 +5406,6 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
   <owl:Class rdf:about="http://www.w3.org/ns/ssn/System">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/sosa/Procedure"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/implements"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/ssn/System"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/hasSubSystem"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:comment xml:lang="en">System is a unit of abstraction for pieces of infrastructure that implement Procedures. A System may have components, its subsystems, which are other systems.</rdfs:comment>
-    <rdfs:subClassOf>
-      <owl:Restriction>
         <owl:allValuesFrom>
           <owl:Class rdf:about="http://www.w3.org/ns/sosa/Platform"/>
         </owl:allValuesFrom>
@@ -5431,7 +5414,6 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/ns/ssn/"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/ssn/Deployment"/>
@@ -5440,7 +5422,6 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <skos:definition xml:lang="en">System is a unit of abstraction for pieces of infrastructure that implement Procedures. A System may have components, its subsystems, which are other systems.</skos:definition>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/ssn/System"/>
@@ -5448,6 +5429,25 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
           <owl:inverseOf>
             <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/hasSubSystem"/>
           </owl:inverseOf>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">System is a unit of abstraction for pieces of infrastructure that implement Procedures. A System may have components, its subsystems, which are other systems.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/ns/ssn/"/>
+    <skos:definition xml:lang="en">System is a unit of abstraction for pieces of infrastructure that implement Procedures. A System may have components, its subsystems, which are other systems.</skos:definition>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/ssn/System"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/hasSubSystem"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/sosa/Procedure"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/implements"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -7254,27 +7254,25 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
         <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:cardinality>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeByActuator"/>
+          <owl:DatatypeProperty rdf:about="http://www.w3.org/ns/sosa/resultTime"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <skos:example xml:lang="en">The activity of automatically closing a window if the temperature in a room drops below 20 degree Celsius. The activity is the Actuation and the device that closes the window is the Actuator. The Procedure is the rule, plan, or specification that defines the conditions that triggers the Actuation, here a drop in temperature. </skos:example>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:cardinality>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/sosa/Actuator"/>
         <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://www.w3.org/ns/sosa/resultTime"/>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeByActuator"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://www.w3.org/ns/sosa/ActuatableProperty"/>
-        </owl:allValuesFrom>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/actsOnProperty"/>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeByActuator"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -7292,12 +7290,25 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/sosa/Actuator"/>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.w3.org/ns/sosa/FeatureOfInterest"/>
+        </owl:allValuesFrom>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeByActuator"/>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/hasFeatureOfInterest"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.w3.org/ns/sosa/ActuatableProperty"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/actsOnProperty"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Actuation</rdfs:label>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
@@ -7307,32 +7318,20 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:label xml:lang="en">Actuation</rdfs:label>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/sosa/Procedure"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/usedProcedure"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://www.w3.org/ns/sosa/FeatureOfInterest"/>
-        </owl:allValuesFrom>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/hasFeatureOfInterest"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:comment xml:lang="en">An Actuation carries out an (Actuation) Procedure to change the state of the world using an Actuator.</rdfs:comment>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:minCardinality>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/actsOnProperty"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/sosa/Procedure"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/usedProcedure"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -7345,6 +7344,7 @@ It is named in honor of Albert Einstein, who in a 1905 paper explained the photo
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">An Actuation carries out an (Actuation) Procedure to change the state of the world using an Actuator.</rdfs:comment>
   </owl:Class>
   <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-standards.owl#Day">
     <rdfs:subClassOf>
@@ -8666,6 +8666,17 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
   <owl:Class rdf:about="http://www.w3.org/ns/sosa/ObservableProperty">
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/isObservedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/ns/sosa/"/>
+    <skos:definition xml:lang="en">An observable quality (property, characteristic) of a FeatureOfInterest.</skos:definition>
+    <rdfs:comment xml:lang="en">An observable quality (property, characteristic) of a FeatureOfInterest.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/ssn/Stimulus"/>
         <owl:onProperty rdf:parseType="Resource">
           <owl:inverseOf>
@@ -8674,16 +8685,9 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/ns/sosa/"/>
-    <skos:definition xml:lang="en">An observable quality (property, characteristic) of a FeatureOfInterest.</skos:definition>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/isObservedBy"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
+    <skos:example xml:lang="en">The height of a tree, the depth of a water body, or the temperature of a surface are examples of observable properties, while the value of a classic car is not (directly) observable but asserted.</skos:example>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/ssn/Property"/>
+    <rdfs:label xml:lang="en">Observable Property</rdfs:label>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
@@ -8694,10 +8698,6 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:comment xml:lang="en">An observable quality (property, characteristic) of a FeatureOfInterest.</rdfs:comment>
-    <skos:example xml:lang="en">The height of a tree, the depth of a water body, or the temperature of a surface are examples of observable properties, while the value of a classic car is not (directly) observable but asserted.</skos:example>
-    <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/ssn/Property"/>
-    <rdfs:label xml:lang="en">Observable Property</rdfs:label>
   </owl:Class>
   <owl:Class rdf:about="http://www.w3.org/ns/sosa/Result">
     <skos:example xml:lang="en">The value 20 as the height of a certain tree together with the unit, e.g., Meter.</skos:example>
@@ -8836,6 +8836,7 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
     <rdfs:subClassOf rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#DerivedUnit"/>
   </owl:Class>
   <owl:Class rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Measurement">
+    <rdfs:comment>A measurement is an assertion that a characteristic of an entity had a particular value with respect to an observation event.  A measurement is comprised of a characteristic, a value, a measurement standard, and a protocol. Measurements can also have precision as well as a description of the methods used. Measurements can encapsulate characteristics that were recorded, but not necessarily measured in a physical sense.  For example, the name of a location and a taxon can be captured through measurements.</rdfs:comment>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:someValuesFrom rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Protocol"/>
@@ -8844,23 +8845,12 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:comment>A measurement is an assertion that a characteristic of an entity had a particular value with respect to an observation event.  A measurement is comprised of a characteristic, a value, a measurement standard, and a protocol. Measurements can also have precision as well as a description of the methods used. Measurements can encapsulate characteristics that were recorded, but not necessarily measured in a physical sense.  For example, the name of a location and a taxon can be captured through measurements.</rdfs:comment>
+    <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Protocol"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:someValuesFrom rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Characteristic"/>
         <owl:onProperty>
           <owl:FunctionalProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#ofCharacteristic"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Protocol"/>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onClass rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Observation"/>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:qualifiedCardinality>
-        <owl:onProperty>
-          <owl:FunctionalProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#measurementFor"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -8871,6 +8861,14 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
     <owl:disjointWith rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Observation"/>
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#MeasuredValue"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#hasValue"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
         <owl:someValuesFrom rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Standard"/>
         <owl:onProperty>
           <owl:FunctionalProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#usesStandard"/>
@@ -8879,9 +8877,11 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:someValuesFrom rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#MeasuredValue"/>
+        <owl:onClass rdf:resource="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#Observation"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:qualifiedCardinality>
         <owl:onProperty>
-          <owl:FunctionalProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#hasValue"/>
+          <owl:FunctionalProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#measurementFor"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -9345,17 +9345,17 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
     <rdfs:comment xml:lang="en">A relation to link to a re-usable Procedure used in making an Observation, an Actuation, or a Sample, typically through a Sensor, Actuator or Sampler.</rdfs:comment>
     <rdfs:label xml:lang="en">used procedure</rdfs:label>
     <owl:propertyChainAxiom rdf:parseType="Collection">
-      <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeBySampler"/>
+      <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeBySensor"/>
+      <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/implements"/>
+    </owl:propertyChainAxiom>
+    <owl:propertyChainAxiom rdf:parseType="Collection">
+      <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeByActuator"/>
       <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/implements"/>
     </owl:propertyChainAxiom>
     <skos:definition xml:lang="en">A relation to link to a re-usable Procedure used in making an Observation, an Actuation, or a Sample, typically through a Sensor, Actuator or Sampler.</skos:definition>
     <schema:domainIncludes rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
     <owl:propertyChainAxiom rdf:parseType="Collection">
-      <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeByActuator"/>
-      <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/implements"/>
-    </owl:propertyChainAxiom>
-    <owl:propertyChainAxiom rdf:parseType="Collection">
-      <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeBySensor"/>
+      <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/madeBySampler"/>
       <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/implements"/>
     </owl:propertyChainAxiom>
   </owl:ObjectProperty>
@@ -9665,12 +9665,12 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
     <schema:rangeIncludes rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
     <owl:inverseOf rdf:resource="http://www.w3.org/ns/sosa/isHostedBy"/>
     <schema:domainIncludes rdf:resource="http://www.w3.org/ns/sosa/Platform"/>
-    <skos:definition xml:lang="en">Relation between a Platform and a Sensor, Actuator, Sampler, or Platform, hosted or mounted on it.</skos:definition>
-    <rdfs:comment xml:lang="en">Relation between a Platform and a Sensor, Actuator, Sampler, or Platform, hosted or mounted on it.</rdfs:comment>
     <owl:propertyChainAxiom rdf:parseType="Collection">
       <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/inDeployment"/>
       <owl:ObjectProperty rdf:about="http://www.w3.org/ns/ssn/deployedSystem"/>
     </owl:propertyChainAxiom>
+    <skos:definition xml:lang="en">Relation between a Platform and a Sensor, Actuator, Sampler, or Platform, hosted or mounted on it.</skos:definition>
+    <rdfs:comment xml:lang="en">Relation between a Platform and a Sensor, Actuator, Sampler, or Platform, hosted or mounted on it.</rdfs:comment>
   </owl:ObjectProperty>
   <owl:DatatypeProperty rdf:about="http://www.w3.org/ns/sosa/hasSimpleResult">
     <skos:example xml:lang="en">For instance, the values 23 or true.</skos:example>
@@ -9867,22 +9867,6 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
     <owl:inverseOf rdf:resource="http://www.w3.org/ns/sosa/isSampleOf"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </owl:InverseFunctionalProperty>
-  <owl:AllDisjointClasses>
-    <owl:members rdf:parseType="Collection">
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DataProvider"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Definition"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DewPoint"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#GlobalHorizontalIrradiance"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Humidity"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Ozone"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Pressure"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Rainfall"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Temperature"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Time"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#WeatherDescription"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Wind"/>
-    </owl:members>
-  </owl:AllDisjointClasses>
   <oboe-core:Observation rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#ObservationSolcast">
     <oboe-core:hasMeasurement>
       <oboe-core:Measurement rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#MeasurementGlobalHorizontalIrradianceCenterValue">
@@ -9916,7 +9900,7 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
         </oboe-core:usesStandard>
         <oboe-core:hasValue>
           <oboe-core:MeasuredValue rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#MeasurementValueGlobalHorizontalIrradianceCenterValue">
-            <oboe-core:hasCode>0</oboe-core:hasCode>
+            <oboe-core:hasCode>184</oboe-core:hasCode>
           </oboe-core:MeasuredValue>
         </oboe-core:hasValue>
       </oboe-core:Measurement>
@@ -9942,7 +9926,7 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
         <oboe-core:usesStandard rdf:resource="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#WattPerMeterSquared"/>
         <oboe-core:hasValue>
           <oboe-core:MeasuredValue rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#MeasurementValueDirectNormalIrradiance90thPercentileValue">
-            <oboe-core:hasCode>0</oboe-core:hasCode>
+            <oboe-core:hasCode>507</oboe-core:hasCode>
           </oboe-core:MeasuredValue>
         </oboe-core:hasValue>
       </oboe-core:Measurement>
@@ -9957,7 +9941,7 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
         <oboe-core:usesStandard rdf:resource="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#WattPerMeterSquared"/>
         <oboe-core:hasValue>
           <oboe-core:MeasuredValue rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#MeasurementValueDirectNormalIrradianceCenterValue">
-            <oboe-core:hasCode>0</oboe-core:hasCode>
+            <oboe-core:hasCode>507</oboe-core:hasCode>
           </oboe-core:MeasuredValue>
         </oboe-core:hasValue>
       </oboe-core:Measurement>
@@ -9972,7 +9956,7 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
         <oboe-core:usesStandard rdf:resource="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#WattPerMeterSquared"/>
         <oboe-core:hasValue>
           <oboe-core:MeasuredValue rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#MeasurementValueGlobalHorizontalIrradiance90thPercentileValue">
-            <oboe-core:hasCode>0</oboe-core:hasCode>
+            <oboe-core:hasCode>184</oboe-core:hasCode>
           </oboe-core:MeasuredValue>
         </oboe-core:hasValue>
       </oboe-core:Measurement>
@@ -9998,7 +9982,7 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
         <oboe-core:usesStandard rdf:resource="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#Degree"/>
         <oboe-core:hasValue>
           <oboe-core:MeasuredValue rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#MeasurementValueAzimuth">
-            <oboe-core:hasCode>-127</oboe-core:hasCode>
+            <oboe-core:hasCode>78</oboe-core:hasCode>
           </oboe-core:MeasuredValue>
         </oboe-core:hasValue>
       </oboe-core:Measurement>
@@ -10017,7 +10001,7 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
         <hasDefinition>is the amount of radiation received per unit area by a surface that does not arrive on a direct path from the sun, but has been scattered by molecules and particles in the atmosphere and comes equally from all directions</hasDefinition>
         <oboe-core:hasValue>
           <oboe-core:MeasuredValue rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#MeasurementValueDiffuseHorizontalIrradiance">
-            <oboe-core:hasCode>0</oboe-core:hasCode>
+            <oboe-core:hasCode>63</oboe-core:hasCode>
           </oboe-core:MeasuredValue>
         </oboe-core:hasValue>
       </oboe-core:Measurement>
@@ -10032,7 +10016,7 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
         <oboe-core:usesStandard rdf:resource="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#WattPerMeterSquared"/>
         <oboe-core:hasValue>
           <oboe-core:MeasuredValue rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#MeasurementValueGlobalHorizontalIrradiance10thPercentileValue">
-            <oboe-core:hasCode>0</oboe-core:hasCode>
+            <oboe-core:hasCode>178</oboe-core:hasCode>
           </oboe-core:MeasuredValue>
         </oboe-core:hasValue>
       </oboe-core:Measurement>
@@ -10047,7 +10031,7 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
         <oboe-core:usesStandard rdf:resource="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#WattPerMeterSquared"/>
         <oboe-core:hasValue>
           <oboe-core:MeasuredValue rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#MeasurementValueDirectNormalIrradiance10thPercentileValue">
-            <oboe-core:hasCode>0</oboe-core:hasCode>
+            <oboe-core:hasCode>491</oboe-core:hasCode>
           </oboe-core:MeasuredValue>
         </oboe-core:hasValue>
       </oboe-core:Measurement>
@@ -10091,7 +10075,7 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
         <oboe-core:usesStandard rdf:resource="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#Degree"/>
         <oboe-core:hasValue>
           <oboe-core:MeasuredValue rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#MeasurementValueZenith">
-            <oboe-core:hasCode>136</oboe-core:hasCode>
+            <oboe-core:hasCode>76</oboe-core:hasCode>
           </oboe-core:MeasuredValue>
         </oboe-core:hasValue>
       </oboe-core:Measurement>
@@ -10100,6 +10084,23 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
   <owl:AnnotationProperty rdf:about="http://xmlns.com/foaf/0.1/name"/>
   <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespaceUri"/>
   <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#note"/>
+  <owl:AllDisjointClasses>
+    <owl:members rdf:parseType="Collection">
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#ApparentTemperatureHighTime"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#ApparentTemperatureLowTime"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Hour"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#PrecipitationIntensityMaxTime"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#SunriseTime"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#SunsetTime"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#WindGustTime"/>
+    </owl:members>
+  </owl:AllDisjointClasses>
+  <foaf:Agent>
+    <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
+  </foaf:Agent>
+  <owl:AnnotationProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#similarConceptAsClass">
+    <rdfs:comment>A class annotation property that states that the annotated class is conceptually similar (e.g., overlapping), but not identical to the referenced class (the value of the annotation property).</rdfs:comment>
+  </owl:AnnotationProperty>
   <swrl:Imp>
     <swrl:head>
       <swrl:AtomList>
@@ -10156,18 +10157,40 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
       </swrl:AtomList>
     </swrl:body>
   </swrl:Imp>
-  <owl:AnnotationProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#similarConceptAsClass">
-    <rdfs:comment>A class annotation property that states that the annotated class is conceptually similar (e.g., overlapping), but not identical to the referenced class (the value of the annotation property).</rdfs:comment>
-  </owl:AnnotationProperty>
-  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/title"/>
-  <owl:AnnotationProperty rdf:about="http://schema.org/rangeIncludes"/>
-  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/rights"/>
   <foaf:Agent>
     <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
   </foaf:Agent>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/title"/>
+  <owl:AnnotationProperty rdf:about="http://schema.org/rangeIncludes"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/rights"/>
+  <owl:AllDisjointClasses>
+    <owl:members rdf:parseType="Collection">
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#ApparentTemperature"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#InstantaneousTemperature"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#MaximumTemperature"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#MinimumTemperature"/>
+    </owl:members>
+  </owl:AllDisjointClasses>
   <j.3:Sensor rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#MotionLightDetector">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </j.3:Sensor>
+  <j.3:Sensor rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#Lysimeter"/>
+  <owl:AllDisjointClasses>
+    <owl:members rdf:parseType="Collection">
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DataProvider"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Definition"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DewPoint"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#GlobalHorizontalIrradiance"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Humidity"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Ozone"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Pressure"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Rainfall"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Temperature"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Time"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#WeatherDescription"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Wind"/>
+    </owl:members>
+  </owl:AllDisjointClasses>
   <owl:AllDisjointClasses>
     <owl:members rdf:parseType="Collection">
       <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DarkSky"/>
@@ -10176,7 +10199,74 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
       <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#UFJFForecast"/>
     </owl:members>
   </owl:AllDisjointClasses>
-  <j.3:Sensor rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#Lysimeter"/>
+  <owl:AllDisjointClasses>
+    <owl:members rdf:parseType="Collection">
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#PrecipitationIntensity"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#PrecipitationIntensityMax"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#PrecipitationProbability"/>
+    </owl:members>
+  </owl:AllDisjointClasses>
+  <foaf:Agent>
+    <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
+  </foaf:Agent>
+  <foaf:Agent>
+    <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
+  </foaf:Agent>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/creator"/>
+  <j.3:Sensor rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#Magnetometer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </j.3:Sensor>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/created"/>
+  <owl:AllDisjointClasses>
+    <owl:members rdf:parseType="Collection">
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DataProvider"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DewPoint"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Humidity"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Ozone"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Pressure"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Rainfall"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Temperature"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Time"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#WeatherDescription"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Wind"/>
+    </owl:members>
+  </owl:AllDisjointClasses>
+  <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#definition"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/license"/>
+  <foaf:Agent>
+    <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
+  </foaf:Agent>
+  <owl:AnnotationProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#sameConceptAs">
+    <rdfs:comment>A class annotation property that states that the annotated class is conceptually the same class as (i.e., conceptually equivalent to) the concept identified in the annotation value. If the value of the annotation property denotes an OWL class, then the sameConceptAsClass annotation property should be used instead.</rdfs:comment>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#similarConceptAs">
+    <rdfs:comment>
+        A class annotation property that states that the annotated class is conceptually similar (e.g., overlapping), but not identical to the concept identified by the value of the annotation property. If the value of the annotation property denotes an OWL class, then the similarConceptAsClass annotation property should be used instead.</rdfs:comment>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="http://creativecommons.org/ns#license"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
+  <j.3:Sensor rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#Ceilometer"/>
+  <j.3:Sensor rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#Pyrgeometer"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix"/>
+  <owl:AllDisjointClasses>
+    <owl:members rdf:parseType="Collection">
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#GlobalHorizontalIrradiance10thPercentileValue"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#GlobalHorizontalIrradiance90thPercentileValue"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#GlobalHorizontalIrradianceCenterValue"/>
+    </owl:members>
+  </owl:AllDisjointClasses>
+  <owl:AnnotationProperty rdf:about="http://schema.org/domainIncludes"/>
+  <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#example"/>
+  <foaf:Agent>
+    <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
+  </foaf:Agent>
+  <owl:AllDisjointClasses>
+    <owl:members rdf:parseType="Collection">
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DirectNormalIrradiance10thPercentileValue"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DirectNormalIrradiance90thPercentileValue"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DirectNormalIrradianceCenterValue"/>
+    </owl:members>
+  </owl:AllDisjointClasses>
   <swrl:Imp>
     <swrl:head>
       <swrl:AtomList>
@@ -10227,101 +10317,11 @@ Common derivatives are millibar (meteorology) and decibar (oceanography)</rdfs:c
   </swrl:Imp>
   <owl:AllDisjointClasses>
     <owl:members rdf:parseType="Collection">
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#ApparentTemperatureHighTime"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#ApparentTemperatureLowTime"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Hour"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#PrecipitationIntensityMaxTime"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#SunriseTime"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#SunsetTime"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#WindGustTime"/>
-    </owl:members>
-  </owl:AllDisjointClasses>
-  <foaf:Agent>
-    <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
-  </foaf:Agent>
-  <owl:AllDisjointClasses>
-    <owl:members rdf:parseType="Collection">
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#ApparentTemperature"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#InstantaneousTemperature"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#MaximumTemperature"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#MinimumTemperature"/>
-    </owl:members>
-  </owl:AllDisjointClasses>
-  <foaf:Agent>
-    <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
-  </foaf:Agent>
-  <foaf:Agent>
-    <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
-  </foaf:Agent>
-  <owl:AllDisjointClasses>
-    <owl:members rdf:parseType="Collection">
       <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#WindBearing"/>
       <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#WindGust"/>
       <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#WindSpeed"/>
     </owl:members>
   </owl:AllDisjointClasses>
-  <owl:AllDisjointClasses>
-    <owl:members rdf:parseType="Collection">
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DataProvider"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DewPoint"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Humidity"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Ozone"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Pressure"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Rainfall"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Temperature"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Time"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#WeatherDescription"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#Wind"/>
-    </owl:members>
-  </owl:AllDisjointClasses>
-  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/creator"/>
-  <foaf:Agent>
-    <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
-  </foaf:Agent>
-  <j.3:Sensor rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#Magnetometer">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </j.3:Sensor>
-  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/created"/>
-  <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#definition"/>
-  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/license"/>
-  <owl:AllDisjointClasses>
-    <owl:members rdf:parseType="Collection">
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DirectNormalIrradiance10thPercentileValue"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DirectNormalIrradiance90thPercentileValue"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#DirectNormalIrradianceCenterValue"/>
-    </owl:members>
-  </owl:AllDisjointClasses>
-  <owl:AnnotationProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#sameConceptAs">
-    <rdfs:comment>A class annotation property that states that the annotated class is conceptually the same class as (i.e., conceptually equivalent to) the concept identified in the annotation value. If the value of the annotation property denotes an OWL class, then the sameConceptAsClass annotation property should be used instead.</rdfs:comment>
-  </owl:AnnotationProperty>
-  <owl:AnnotationProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#similarConceptAs">
-    <rdfs:comment>
-        A class annotation property that states that the annotated class is conceptually similar (e.g., overlapping), but not identical to the concept identified by the value of the annotation property. If the value of the annotation property denotes an OWL class, then the similarConceptAsClass annotation property should be used instead.</rdfs:comment>
-  </owl:AnnotationProperty>
-  <owl:AnnotationProperty rdf:about="http://creativecommons.org/ns#license"/>
-  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
-  <owl:AllDisjointClasses>
-    <owl:members rdf:parseType="Collection">
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#PrecipitationIntensity"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#PrecipitationIntensityMax"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#PrecipitationProbability"/>
-    </owl:members>
-  </owl:AllDisjointClasses>
-  <foaf:Agent>
-    <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
-  </foaf:Agent>
-  <j.3:Sensor rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#Ceilometer"/>
-  <j.3:Sensor rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#Pyrgeometer"/>
-  <owl:AllDisjointClasses>
-    <owl:members rdf:parseType="Collection">
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#GlobalHorizontalIrradiance10thPercentileValue"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#GlobalHorizontalIrradiance90thPercentileValue"/>
-      <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#GlobalHorizontalIrradianceCenterValue"/>
-    </owl:members>
-  </owl:AllDisjointClasses>
-  <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix"/>
-  <owl:AnnotationProperty rdf:about="http://schema.org/domainIncludes"/>
-  <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#example"/>
   <owl:AnnotationProperty rdf:about="http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#sameConceptAsClass">
     <rdfs:comment>A class annotation property that states that the annotated class is conceptually the same class as (i.e., conceptually equivalent to) the referenced class (as given by the value of the annotation property). Note that being conceptually the same can differ from strict class equivalance in that the two classes may have different structural definitions within their specific ontologies, e.g., their superclasses and subclasses in the respective ontologies may differ.</rdfs:comment>
   </owl:AnnotationProperty>

@@ -1,6 +1,8 @@
 package controller;
 
 import dao.OntologyAccess;
+import dao.SolcastSPARQL;
+import model.solcastmodel.SolcastRDFReading;
 import org.apache.jena.ontology.OntModel;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +21,10 @@ public class Application {
         OntologyDataCreation odc = new OntologyDataCreation();
         OntModel om = OntologyDataCreation.createInstanceSolcast(ontModel);
         odc.writeOntology(om);
+
+        SolcastRDFReading srr = new SolcastRDFReading();
+        SolcastSPARQL ss = new SolcastSPARQL();
+        srr.setSolcastAttributes(ss);
 
         SpringApplication.run(Application.class, args);
      /*   OntologyDataCreation odc = new OntologyDataCreation();
