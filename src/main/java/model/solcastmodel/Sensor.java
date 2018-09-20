@@ -1,12 +1,10 @@
 package model.solcastmodel;
 
-import java.util.List;
-
 public class Sensor {
 
     private String name;
-    private List<OperatingProperty> operatingProperty;
-    private List<OperatingProperty> operatingRange; // ambos OperatingProperty e OperatingRange tem os mesmos atributos
+    private SensorProperty operatingProperty;
+    private SensorProperty operatingRange; // ambos SensorProperty e OperatingRange tem os mesmos atributos
 
     public String getName() {
         return name;
@@ -16,19 +14,19 @@ public class Sensor {
         this.name = name;
     }
 
-    public List<OperatingProperty> getOperatingProperty() {
+    public SensorProperty getOperatingProperty() {
         return operatingProperty;
     }
 
-    public void setOperatingProperty(List<OperatingProperty> operatingProperty) {
-        this.operatingProperty = operatingProperty;
+    public void setOperatingProperty(SensorProperty sensorProperty) {
+        this.operatingProperty = sensorProperty;
     }
 
-    public List<OperatingProperty> getOperatingRange() {
+    public SensorProperty getOperatingRange() {
         return operatingRange;
     }
 
-    public void setOperatingRange(List<OperatingProperty> operatingRange) {
+    public void setOperatingRange(SensorProperty operatingRange) {
         this.operatingRange = operatingRange;
     }
 }

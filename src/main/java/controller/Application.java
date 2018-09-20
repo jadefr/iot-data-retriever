@@ -1,14 +1,18 @@
 package controller;
 
+import com.google.gson.Gson;
 import dao.OntologyAccess;
 import dao.SolcastSPARQL;
+import model.solcastmodel.SolcastGSONWriting;
 import model.solcastmodel.SolcastRDFReading;
 import org.apache.jena.ontology.OntModel;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import util.OntologyDataCreation;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @SpringBootApplication
 public class Application {
@@ -22,14 +26,7 @@ public class Application {
         OntModel om = OntologyDataCreation.createInstanceSolcast(ontModel);
         odc.writeOntology(om);
 
-        SolcastRDFReading srr = new SolcastRDFReading();
-        SolcastSPARQL ss = new SolcastSPARQL();
-        srr.setSolcastAttributes(ss);
-
         SpringApplication.run(Application.class, args);
-     /*   OntologyDataCreation odc = new OntologyDataCreation();
-        odc.writeOntology(ontModel);
-        SpringApplication.run(App.class, args);
-        */
+
     }
 }

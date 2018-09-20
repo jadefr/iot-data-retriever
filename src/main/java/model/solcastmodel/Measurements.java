@@ -4,16 +4,16 @@ import java.util.List;
 
 public class Measurements {
 
-    private List<Characteristic> characteristic;
+    private Characteristic characteristic;
     private String standard;
-    private List<Sensor> sensor;
+    private Sensor sensor;
     private String definition;
 
-    public List<Characteristic> getCharacteristic() {
+    public Characteristic getCharacteristic() {
         return characteristic;
     }
 
-    public void setCharacteristic(List<Characteristic> characteristic) {
+    public void setCharacteristic(Characteristic characteristic) {
         this.characteristic = characteristic;
     }
 
@@ -25,11 +25,11 @@ public class Measurements {
         this.standard = standard;
     }
 
-    public List<Sensor> getSensor() {
+    public Sensor getSensor() {
         return sensor;
     }
 
-    public void setSensor(List<Sensor> sensor) {
+    public void setSensor(Sensor sensor) {
         this.sensor = sensor;
     }
 

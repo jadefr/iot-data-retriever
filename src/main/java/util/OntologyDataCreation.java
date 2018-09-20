@@ -252,7 +252,7 @@ public class OntologyDataCreation {
         OntClass operatingRangeClass = ontModel.getOntClass(BASE_URI4 + "OperatingRange");
         Individual spectralRangeIndividual = operatingRangeClass.createIndividual(BASE_URI4 + "SpectralRange");
         Individual temperatureRangeIndividual = operatingRangeClass.createIndividual(BASE_URI4 + "TemperatureRange");
-        OntClass operatingPropertyClass = ontModel.getOntClass(BASE_URI4 + "OperatingProperty");
+        OntClass operatingPropertyClass = ontModel.getOntClass(BASE_URI4 + "SensorProperty");
         Individual viewAngleOpacitySensorIndividual = operatingPropertyClass.createIndividual(BASE_URI4 + "ViewAngleOpacitySensor");
         Individual viewAnglePyranometerIndividual = operatingPropertyClass.createIndividual(BASE_URI4 + "ViewAnglePyranometer");
         Individual viewAnglePyrheliometerIndividual = operatingPropertyClass.createIndividual(BASE_URI4 + "ViewAnglePyrheliometer");
@@ -310,7 +310,6 @@ public class OntologyDataCreation {
             //Associar os valores obtidos na API
             if (value != null) {
                 Resource hasCodeLink = measurementValueIndividual.addProperty(hasCode, value);
-                System.out.println("hasCodeLink: " + hasCodeLink);
                 links[2] = hasCodeLink;
             }
 
@@ -437,9 +436,9 @@ public class OntologyDataCreation {
             //link entre measurement e sensor
             if (sensorIndividual != null) {
                 Resource madeBySensorLink = measurementIndividual.addProperty(madeBySensor, sensorIndividual);
-                System.out.println("madeBySensorLink:: " + madeBySensorLink);
+            /*    System.out.println("madeBySensorLink:: " + madeBySensorLink);
                 System.out.println("madeBySensor:: " + madeBySensor);
-                System.out.println("sensorIndividual:: " + sensorIndividual);
+                System.out.println("sensorIndividual:: " + sensorIndividual);*/
                 links[4] = madeBySensor;
             }
 
@@ -450,14 +449,15 @@ public class OntologyDataCreation {
             }
 
             if (operatingPropertyStandardIndividual != null) {
-                //link entre OperatingProperty e Standard
+                //link entre SensorProperty e Standard
                 Resource usesStandardOperatingPropertyLink = operatingPropertyIndividual.addProperty(usesStandard, operatingPropertyStandardIndividual);
+               /* System.out.println("usesStandardOperatingPropertyLink:: " + usesStandardOperatingPropertyLink);
                 System.out.println("operatingPropertyIndividual:: " + operatingPropertyIndividual);
                 System.out.println("usesStandard:: " + usesStandard);
-                System.out.println("operatingPropertyStandardIndividual:: " + operatingPropertyStandardIndividual);
+                System.out.println("operatingPropertyStandardIndividual:: " + operatingPropertyStandardIndividual);*/
                 links[5] = usesStandardOperatingPropertyLink;
 
-                //link entre OperatingProperty e hasCode
+                //link entre SensorProperty e hasCode
                 Resource hasOperatingPropertyCodeLink = operatingPropertyIndividual.addProperty(hasCode, operatingPropertyValue);
                 links[6] = hasOperatingPropertyCodeLink;
 

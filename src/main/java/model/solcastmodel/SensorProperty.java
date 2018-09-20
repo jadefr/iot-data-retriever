@@ -1,6 +1,6 @@
 package model.solcastmodel;
 
-public class OperatingProperty {
+public class SensorProperty {
 
     private String name;
     private String value;

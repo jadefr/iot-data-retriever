@@ -1,6 +1,8 @@
 package controller;
 
 import dao.SolcastSPARQL;
+import model.solcastmodel.SolcastBean;
+import model.solcastmodel.SolcastGSONWriting;
 import util.darksky.DarkSky;
 import util.darksky.DarkSkyJSONReading;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +16,13 @@ import java.util.ArrayList;
 @RequestMapping("/dataintegration")
 public class Controller {
 
+
     @RequestMapping("/solcast")
-    public ArrayList getSolcast() throws IOException {
-        ArrayList solcastList = SolcastSPARQL.getSolcastFromOntology();
-        return solcastList;
+    public SolcastBean getSolcast() throws IOException {
+        SolcastBean solcastBean = new SolcastBean();
+        SolcastGSONWriting solcastGSONWriting = new SolcastGSONWriting();
+        solcastBean.setMeasurements(solcastGSONWriting.writeGSON());
+        return solcastBean;
     }
 
     @RequestMapping("/darksky")
@@ -26,8 +31,8 @@ public class Controller {
         return DarkSkyJSONReading.readDarkSky();
     }
 
-    @RequestMapping("/teste")
-    public String getTest(){
+  /*  @RequestMapping("/teste")
+    public String getTest() {
         return "testando";
     }
 
@@ -35,6 +40,6 @@ public class Controller {
     public String hello(@PathVariable String name) {
         return "Hello, " + name + "!";
     }
-
+*/
 
 }

@@ -67,6 +67,8 @@ public class SolcastRDFReading {
         return definitions;
     }
 
+
+
     public  SolcastRDFReading(SolcastSPARQL ss) throws IOException {
         ArrayList<String> solcastList = ss.getSolcastFromOntology();
 
@@ -89,18 +91,12 @@ public class SolcastRDFReading {
             for (String attribute : attributes) {
 
                 if (attribute.contains("<")) {
-                    System.out.println("attribute:: " + attribute);
                     int x = attribute.indexOf("<");
                     int y = attribute.indexOf(">");
                     String feature = attribute.substring(x + 1, y);
-                    System.out.println("feature:: " + feature);
 
                     if (attribute.contains("?characteristic")) {
-                        System.out.println("Characteristic:: " + feature);
                         characteristicNames.add(feature);
-                        // } else if (attribute.contains("?x")) {
-                        //     System.out.println("x:: " + value);
-                        //characteristicValues.add(value);
                     } else if (attribute.contains("?standard")) {
                         standards.add(feature);
                     } else if (attribute.contains("?sensor")) {
@@ -109,33 +105,26 @@ public class SolcastRDFReading {
                         operatingPropertyNames.add(feature);
                     } else if (attribute.contains("?operatingStandard")) {
                         operatingPropertyStandards.add(feature);
-                        //} else if (attribute.contains("?y")) {
-                        //operatingPropertyValues.add(value);
                     } else if (attribute.contains("?operatingRange")) {
                         operatingRangeNames.add(feature);
                     } else if (attribute.contains("?rangeStandard")) {
                         operatingRangeStandards.add(feature);
-                        //} else if (attribute.contains("?z")) {
-                        //operatingRangeValues.add(value);
-                    } else if (attribute.contains("?definition")) {
-                        definitions.add(feature);
                     }
 
                 } else if (attribute.contains("\"")) {
                     int a = attribute.indexOf("\"");
                     int length = attribute.length();
-                    System.out.println("a::" + a);
-                    System.out.println("b::" + length);
                     String value = attribute.substring(a + 1, length - 2);
-                    System.out.println("value::" + value);
 
                     if (attribute.contains("?x")) {
-                        System.out.println("x:: " + value);
                         characteristicValues.add(value);
                     } else if (attribute.contains("?y")) {
                         operatingPropertyValues.add(value);
                     } else if (attribute.contains("?z")) {
-                        operatingRangeValues.add(value);
+                        String operatingRange = value.substring(0,(value.length())-1);
+                        operatingRangeValues.add(operatingRange);
+                    } else if (attribute.contains("?definition")) {
+                        definitions.add(value);
                     }
 
 
