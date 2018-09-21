@@ -1,13 +1,15 @@
-package dao;
+package app.dao;
 
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.ReasonerRegistry;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -27,6 +29,20 @@ public class OntologyAccess {
 
         //ontologia carregada na maquina de inferencia
         //  ontModel = ModelFactory.createOntologyModel(ontModelSpec, ontModel);
+        return ontModel;
+    }
+
+    public static OntModel loadOntologyModelFromUrl(String url) throws IOException {
+
+        OntModel ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
+
+        InputStream input = new URL(url).openStream();
+        ontModel.read(input, "RDF/XML");
+        Reasoner reasoner = ReasonerRegistry.getOWLReasoner();
+        reasoner = reasoner.bindSchema(ontModel);
+        OntModelSpec ontModelSpec = OntModelSpec.OWL_DL_MEM_TRANS_INF;
+        ontModelSpec.setReasoner(reasoner);
+
         return ontModel;
     }
 }

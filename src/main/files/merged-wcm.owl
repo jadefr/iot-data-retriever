@@ -34,13 +34,13 @@ In particular, (a) the scope is extended to include actuation and sampling; (b) 
                 <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
             </rdf:Description>
         </terms:creator>
+        <rdfs:comment>This ontology contains general terms for (physical) characteristics that are measured either quantitatively or qualitatively.</rdfs:comment>
         <terms:creator>
             <rdf:Description>
-                <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
                 <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+                <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
             </rdf:Description>
         </terms:creator>
-        <rdfs:comment>This ontology contains general terms for (physical) characteristics that are measured either quantitatively or qualitatively.</rdfs:comment>
         <vann:preferredNamespaceUri>http://www.w3.org/ns/sosa/</vann:preferredNamespaceUri>
         <vann:preferredNamespacePrefix>sosa</vann:preferredNamespacePrefix>
         <terms:rights>Copyright 2017 W3C/OGC.</terms:rights>
@@ -9702,6 +9702,12 @@ a siemens is Ampere/volt</rdfs:comment>
     
 
 
+    <!-- http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#SensorProperty -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#SensorProperty"/>
+    
+
+
     <!-- http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#SpectralRange -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#SpectralRange"/>
@@ -10339,6 +10345,14 @@ a siemens is Ampere/volt</rdfs:comment>
     <owl:NamedIndividual rdf:about="http://www.w3.org/ns/ssn/">
         <rdf:type rdf:resource="http://purl.org/vocommons/voaf#Vocabulary"/>
     </owl:NamedIndividual>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
+    </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>

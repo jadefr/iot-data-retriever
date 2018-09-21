@@ -1,0 +1,8 @@
+/.idea
+*.iml
+/lib
+/out
+/target
+/nbproject
+nb-configuration.xml
+*.war
