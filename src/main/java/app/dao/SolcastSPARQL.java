@@ -1,4 +1,4 @@
-package dao;
+package app.dao;
 
 import com.google.gson.Gson;
 import org.apache.jena.ontology.OntModel;
@@ -13,7 +13,8 @@ public class SolcastSPARQL {
 
     public static ArrayList<String> getSolcastFromOntology() throws IOException {
 
-        OntModel ontModel = OntologyAccess.loadOntologyModel(PATH, "oboe_wcm_integrated.rdf");
+        OntModel ontModel = OntologyAccess.loadOntologyModelFromUrl("http://datawebhost.com.br/ontologies/oboe_wcm_integrated.rdf");
+        //OntModel ontModel = OntologyAccess.loadOntologyModel(PATH, "oboe_wcm_integrated.rdf");
 
         String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
                 + "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n"

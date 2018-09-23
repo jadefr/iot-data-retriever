@@ -1,11 +1,9 @@
-package model.solcastmodel;
+package app.model.solcastmodel;
 
-import dao.SolcastSPARQL;
+import app.dao.SolcastSPARQL;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class SolcastRDFReading {
 

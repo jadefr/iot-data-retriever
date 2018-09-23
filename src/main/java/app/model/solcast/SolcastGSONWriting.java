@@ -1,6 +1,6 @@
-package model.solcastmodel;
+package app.model.solcastmodel;
 
-import dao.SolcastSPARQL;
+import app.dao.SolcastSPARQL;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,19 +8,19 @@ import java.util.List;
 
 public class SolcastGSONWriting {
 
-    private static Measurements measurements;
+    private static Measurement measurement;
     private SolcastSPARQL ss;
     private static SolcastRDFReading solcastRDFReading;
 
 
     public SolcastGSONWriting() throws IOException {
-        measurements = new Measurements();
+        measurement = new Measurement();
         ss = new SolcastSPARQL();
         solcastRDFReading = new SolcastRDFReading(ss);
     }
 
 
-    public List<Measurements> writeGSON() throws IOException {
+    public List<Measurement> writeGSON() throws IOException {
 
         ArrayList<String> characteristicNames = solcastRDFReading.getCharacteristicNames();
         ArrayList<String> characteristicValues = solcastRDFReading.getCharacteristicValues();
@@ -40,14 +40,14 @@ public class SolcastGSONWriting {
         SensorProperty operatingProperty = new SensorProperty();
         SensorProperty operatingRange = new SensorProperty();
 
-        List<Measurements> measurementsList = new ArrayList<Measurements>();
+        List<Measurement> measurementList = new ArrayList<Measurement>();
         for (int i = 0; i < solcastSparqlList.size() ; i++){
-            measurements.setStandard(standards.get(i));
-            measurements.setDefinition(definitions.get(i));
+            measurement.setStandard(standards.get(i));
+            measurement.setDefinition(definitions.get(i));
 
             characteristic.setName(characteristicNames.get(i));
             characteristic.setValue(characteristicValues.get(i));
-            measurements.setCharacteristic(characteristic);
+            measurement.setCharacteristic(characteristic);
 
             operatingProperty.setName(operatingPropertyNames.get(i));
             operatingProperty.setStandard(operatingPropertyStandards.get(i));
@@ -60,12 +60,12 @@ public class SolcastGSONWriting {
             sensor.setName(sensors.get(i));
             sensor.setOperatingProperty(operatingProperty);
             sensor.setOperatingRange(operatingRange);
-            measurements.setSensor(sensor);
+            measurement.setSensor(sensor);
 
-            measurementsList.add(measurements);
+            measurementList.add(measurement);
         }
 
-        return measurementsList;
+        return measurementList;
     }
 
 
@@ -91,13 +91,13 @@ public class SolcastGSONWriting {
         //Associando valor a standard
         ArrayList<String> standards = solcastRDFReading.getStandards();
         for (String standard : standards){
-            measurements.setStandard(standard);
+            measurement.setStandard(standard);
         }
 
         //Associando valor a definition
         ArrayList<String> definitions = solcastRDFReading.getDefinitions();
         for (String definition : definitions){
-            measurements.setDefinition(definition);
+            measurement.setDefinition(definition);
         }
 
     }

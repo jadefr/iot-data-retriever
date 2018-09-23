@@ -1,8 +1,6 @@
-package model.solcastmodel;
+package app.model.solcastmodel;
 
-import java.util.List;
-
-public class Measurements {
+public class Measurement {
 
     private Characteristic characteristic;
     private String standard;

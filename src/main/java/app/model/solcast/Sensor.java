@@ -1,4 +1,4 @@
-package model.solcastmodel;
+package app.model.solcastmodel;
 
 public class Sensor {
 
