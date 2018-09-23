@@ -1,4 +1,4 @@
-package app.model.solcastmodel;
+package app.model.solcast;
 
 import app.dao.SolcastSPARQL;
 

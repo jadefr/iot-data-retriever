@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="iotdataretriever" />
+        <module name="iot-data-retriever" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="iot-data-retriever" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
