@@ -1,4 +1,4 @@
-package util;
+package app.util;
 
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.ObjectProperty;

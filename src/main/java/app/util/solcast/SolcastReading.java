@@ -1,4 +1,4 @@
-package util.solcast;
+package app.util.solcast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

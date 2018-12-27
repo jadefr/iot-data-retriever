@@ -1,4 +1,4 @@
-package app.model.solcast;
+package app.service;
 
 import app.dao.SolcastSPARQL;
 
@@ -64,6 +64,7 @@ public class SolcastRDFReading {
     public ArrayList<String> getDefinitions() {
         return definitions;
     }
+
 
 
 

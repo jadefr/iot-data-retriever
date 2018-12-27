@@ -1,4 +1,4 @@
-package util.darksky;
+package app.util.darksky;
 
 public class DarkSky {
 

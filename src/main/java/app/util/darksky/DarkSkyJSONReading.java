@@ -1,4 +1,4 @@
-package util.darksky;
+package app.util.darksky;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

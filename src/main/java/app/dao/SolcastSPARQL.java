@@ -51,7 +51,7 @@ public class SolcastSPARQL {
             String result = null;
             result = next.toString();
             result = result.replace("http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#", "");
-            System.out.println("reultado do sparql: " + result);
+            //System.out.println("reultado do sparql: " + result);
             resultsList.add(result);
         }
 

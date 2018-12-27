@@ -1,4 +1,4 @@
-package util.solcast;
+package app.util.solcast;
 
 /*
 classe destinada a recuperar os dados obtidos pela API e nomea-los de acordo com as devidas classes da ontologia

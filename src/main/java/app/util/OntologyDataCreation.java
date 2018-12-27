@@ -1,4 +1,4 @@
-package util;
+package app.util;
 
 /*
 ler da ontologia merged-wcm e nela escrever as instancias
@@ -8,8 +8,8 @@ ler da ontologia merged-wcm e nela escrever as instancias
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.ontology.*;
 import org.apache.jena.rdf.model.Resource;
-import util.darksky.DarkSkyMeasurements;
-import util.solcast.SolcastMeasurements;
+import app.util.darksky.DarkSkyMeasurements;
+import app.util.solcast.SolcastMeasurements;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

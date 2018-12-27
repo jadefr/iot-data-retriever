@@ -1,7 +1,7 @@
 package app.controller;
 
 import app.model.solcast.SolcastBean;
-import app.model.solcast.SolcastGSONWriting;
+import app.service.SolcastGSONWriting;
 import com.google.gson.Gson;
 import app.model.DefaultRestResult;
 import com.google.gson.JsonElement;
