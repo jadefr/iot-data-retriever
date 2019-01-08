@@ -68,8 +68,8 @@ public class SolcastRDFReading {
 
 
 
-    public  SolcastRDFReading(SolcastSPARQL ss) throws IOException {
-        ArrayList<String> solcastList = ss.getSolcastFromOntology();
+    public  void writeRDF(ArrayList<String> solcastList) throws IOException {
+        //ArrayList<String> solcastList = ss.getSolcastFromOntology();
 
         characteristicNames = new ArrayList<String>();
         characteristicValues = new ArrayList<String>();

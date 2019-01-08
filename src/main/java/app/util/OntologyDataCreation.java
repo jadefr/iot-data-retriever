@@ -485,7 +485,14 @@ public class OntologyDataCreation {
 
             }
 
+            for (Resource resource : links){
+                if (resource!=null){
+                    System.out.println(resource.toString());
+                }
+            }
+
         }
+
 
     }
 

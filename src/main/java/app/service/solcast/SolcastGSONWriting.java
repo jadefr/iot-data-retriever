@@ -10,10 +10,10 @@ import java.util.List;
 public class SolcastGSONWriting {
 
 
-    public List<Measurement> writeGSON() throws IOException{
+    public static List<Measurement> writeGSON(SolcastRDFReading solcastRDFReading) throws IOException{
 
-        SolcastSPARQL ss = new SolcastSPARQL();
-        SolcastRDFReading solcastRDFReading = new SolcastRDFReading(ss);
+        //SolcastSPARQL ss = new SolcastSPARQL();
+        //SolcastRDFReading solcastRDFReading = new SolcastRDFReading(ss);
 
         ArrayList<String> characteristicNames = solcastRDFReading.getCharacteristicNames();
         ArrayList<String> characteristicValues = solcastRDFReading.getCharacteristicValues();

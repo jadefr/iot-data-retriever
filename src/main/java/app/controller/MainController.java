@@ -1,10 +1,13 @@
 package app.controller;
 
 import app.dao.OntologyAccess;
+import app.dao.SolcastSPARQL;
 import app.model.DataSource;
+import app.model.solcast.Measurement;
 import app.model.solcast.SolcastBean;
 import app.service.solcast.Solcast;
 import app.service.solcast.SolcastGSONWriting;
+import app.service.solcast.SolcastRDFReading;
 import app.service.solcast.SolcastReading;
 import app.util.OntologyDataCreation;
 import com.google.gson.Gson;
@@ -30,6 +33,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 @RestController
@@ -52,7 +56,7 @@ public class MainController {
     }
 
 
-   @GetMapping(value = "/solcastNoCoordinates", produces = "application/json")
+  /* @GetMapping(value = "/solcastNoCoordinates", produces = "application/json")
     //public SolcastBean solcast() throws IOException {
     public String solcast() {
         // Init required objects
@@ -76,7 +80,7 @@ public class MainController {
 
         // Return the object as a json string
         return gson.toJson(restResult);
-    }
+    }*/
 
 
     @RequestMapping(value = "/solcast", method = RequestMethod.GET, produces = "application/json")
@@ -94,14 +98,13 @@ public class MainController {
             SolcastReading sr = new SolcastReading(latitude, longitude);
             OntologyDataCreation odc = new OntologyDataCreation(om);
             odc.createInstanceSolcast();
-            odc.writeOntology();
-
-
-
-
+            org.apache.jena.rdf.model.Model finalOntology = odc.writeOntology();
+            ArrayList<String> sparqlList = SolcastSPARQL.getSolcastFromOntology(finalOntology);
+            SolcastRDFReading solcastRDFReading = new SolcastRDFReading();
+            solcastRDFReading.writeRDF(sparqlList);
+            List<Measurement> measurementList = SolcastGSONWriting.writeGSON(solcastRDFReading);
             SolcastBean solcastBean = new SolcastBean();
-            SolcastGSONWriting solcastGSONWriting = new SolcastGSONWriting();
-            solcastBean.setMeasurements(solcastGSONWriting.writeGSON());
+            solcastBean.setMeasurements(measurementList);
 
             // Convert solcastBean to json and set it for restResult
             JsonElement jsonElement = gson.toJsonTree(solcastBean);

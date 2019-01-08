@@ -55,7 +55,6 @@ public class SolcastReading {
         while (line != null) {
             data = data + line;
             line = bufferedReader.readLine();
-            System.out.println("API Solcast: "+ data);
         }
         int size = data.length();
 

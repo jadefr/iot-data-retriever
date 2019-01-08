@@ -2,6 +2,7 @@ package app.dao;
 
 import com.google.gson.Gson;
 import org.apache.jena.ontology.OntModel;
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.query.*;
 
 import java.io.IOException;
@@ -9,11 +10,16 @@ import java.util.ArrayList;
 
 public class SolcastSPARQL {
 
-    private static final String PATH = "C:\\";
+    //private static final String PATH = "C:\\";
+   /* private static Model model;
 
-    public static ArrayList<String> getSolcastFromOntology() throws IOException {
+    public SolcastSPARQL(Model model) {
+        this.model = model;
+    }*/
 
-        OntModel ontModel = OntologyAccess.loadOntologyModelFromUrl("http://datawebhost.com.br/ontologies/oboe_wcm_integrated.rdf");
+    public static ArrayList<String> getSolcastFromOntology(Model model) throws IOException {
+
+        //OntModel ontModel = OntologyAccess.loadOntologyModelFromUrl("http://datawebhost.com.br/ontologies/oboe_wcm_integrated.rdf");
         //OntModel ontModel = OntologyAccess.loadOntologyModel(PATH, "oboe_wcm_integrated.rdf");
 
         String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
@@ -37,7 +43,8 @@ public class SolcastSPARQL {
                 "               ?operatingProperty oboe-core:hasCode ?y.\n" +
                 "               ?operatingRange oboe-core:hasCode ?z}";
 
-        Dataset dataset = DatasetFactory.create(ontModel);
+        //Dataset dataset = DatasetFactory.create(ontModel);
+        Dataset dataset = DatasetFactory.create(model);
 
         org.apache.jena.query.Query consulta;
         consulta = QueryFactory.create(query);// Fazendo o parse da string da consulta e criando o objeto Query
