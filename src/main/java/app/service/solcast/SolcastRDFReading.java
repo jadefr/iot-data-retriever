@@ -1,4 +1,4 @@
-package app.service;
+package app.service.solcast;
 
 import app.dao.SolcastSPARQL;
 

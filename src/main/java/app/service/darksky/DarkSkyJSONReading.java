@@ -1,4 +1,4 @@
-package app.util.darksky;
+package app.service.darksky;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -15,6 +15,7 @@ public class DarkSkyJSONReading {
     public static DarkSky readDarkSky() throws IOException {
 
         URL url = new URL("https://api.darksky.net/forecast/687d8276befb3d1b35d918e6dedaa7f9/-21.758819,-43.350500?lang=pt&units=si");
+        //URL url = new URL("https://api.darksky.net/forecast/687d8276befb3d1b35d918e6dedaa7f9/" + latitude + "," + longitude + "?lang=pt&units=si");
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         InputStream inputStream = httpURLConnection.getInputStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -31,7 +32,7 @@ public class DarkSkyJSONReading {
         DarkSky darkSky = gson.fromJson(data, new TypeToken<DarkSky>() {
         }.getType());
 
-        System.out.println("gson: "+ darkSky.toString());
+        System.out.println("gson: " + darkSky.toString());
         return darkSky;
     }
 }

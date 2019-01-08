@@ -1,4 +1,4 @@
-package app.service;
+package app.service.solcast;
 
 import app.dao.SolcastSPARQL;
 import app.model.solcast.*;
@@ -10,7 +10,7 @@ import java.util.List;
 public class SolcastGSONWriting {
 
 
-    public List<Measurement> writeGSON() throws IOException {
+    public List<Measurement> writeGSON() throws IOException{
 
         SolcastSPARQL ss = new SolcastSPARQL();
         SolcastRDFReading solcastRDFReading = new SolcastRDFReading(ss);

@@ -1,4 +1,4 @@
-package app.util.darksky;
+package app.service.darksky;
 
 //Java Bean
 

@@ -1,4 +1,4 @@
-package app.util.darksky;
+package app.service.darksky;
 
 import java.io.IOException;
 import java.util.ArrayList;

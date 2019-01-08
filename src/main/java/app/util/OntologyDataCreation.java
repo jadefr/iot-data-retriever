@@ -7,9 +7,10 @@ ler da ontologia merged-wcm e nela escrever as instancias
 
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.ontology.*;
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import app.util.darksky.DarkSkyMeasurements;
-import app.util.solcast.SolcastMeasurements;
+import app.service.darksky.DarkSkyMeasurements;
+import app.service.solcast.SolcastMeasurements;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 
 public class OntologyDataCreation {
 
+    static OntModel ontModel;
+
     static final String BASE_URI1 = "http://www.semanticweb.org/jadef/ontologies/2018/4/oboe_wcm#";
     static final String BASE_URI2 = "http://www.semanticweb.org/jadef/ontologies/2018/4/wcm#";
     static final String BASE_URI3 = "http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#";
@@ -25,20 +28,23 @@ public class OntologyDataCreation {
     static final String BASE_URI5 = "http://www.w3.org/ns/sosa/";
     static final String BASE_URI6 = "http://www.w3.org/ns/ssn/";
     static final String BASE_URI7 = "http://ecoinformatics.org/oboe/oboe.1.2/oboe-standards.owl#";
-
-    // private static final String PATH = "/opt/tomcat/webapps/Ontologies/";
-    //private static final String PATH = "src/main/files/";
     private final String path = "src/main/files/";
     private final String path_out = "";
 
+    public OntologyDataCreation(OntModel ontModel) {
+        this.ontModel = ontModel;
+    }
 
-    public void writeOntology(OntModel ontModel) throws IOException {
+
+    public Model writeOntology() throws IOException {
         //metodo para criar a nova ontologia, apos a criacao de instancias pelos metodos abaixo
 
-        OutputStream out = new FileOutputStream(path + "\\oboe_wcm_integrated.rdf");
-        ontModel.write(out, "RDF/XML-ABBREV");
+        //OutputStream out = new FileOutputStream(path + "\\oboe_wcm_integrated.rdf");
+        OutputStream out = new FileOutputStream("\\oboe_wcm_integrated.rdf");
+        Model finalOntology = ontModel.write(out, "RDF/XML-ABBREV");
         out.close();
-
+        System.out.println(finalOntology.toString());
+        return finalOntology;
     }
 
     private static OntModel createInstanceDarkSky(OntModel ontModel) throws IOException {
@@ -169,7 +175,7 @@ public class OntologyDataCreation {
     }
 
 
-    public static OntModel createInstanceSolcast(OntModel ontModel) throws IOException {
+    public void createInstanceSolcast() throws IOException {
 
         //Recuperar a classe Entity - 1 entity com 1 observation
         OntClass entityClass = ontModel.getOntClass(BASE_URI3 + "Entity"); //seleciona a classe Entity
@@ -443,8 +449,8 @@ public class OntologyDataCreation {
             }
 
             //link entre measurement e characteristic
-            if (characteristicIndividual != null){
-                Resource ofCharacteristicLink = measurementIndividual.addProperty(ofCharacteristic,characteristicIndividual);
+            if (characteristicIndividual != null) {
+                Resource ofCharacteristicLink = measurementIndividual.addProperty(ofCharacteristic, characteristicIndividual);
                 links[11] = ofCharacteristicLink;
             }
 
@@ -480,7 +486,7 @@ public class OntologyDataCreation {
             }
 
         }
-        return ontModel;
+
     }
 
 

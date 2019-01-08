@@ -1,4 +1,4 @@
-package app.util.solcast;
+package app.service.solcast;
 
 public class ForecastsIndex {
 

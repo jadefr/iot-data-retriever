@@ -48,7 +48,15 @@
             <artifactId>gson</artifactId>
             <version>2.8.2</version>
         </dependency>
+
+        <!-- DARK SKY -->
+        <dependency>
+            <groupId>tk.plogitech</groupId>
+            <artifactId>darksky-forecast-api</artifactId>
+            <version>1.3.1</version>
+        </dependency>
     </dependencies>
+
 
     <build>
         <finalName>iot-data-retriever</finalName>
