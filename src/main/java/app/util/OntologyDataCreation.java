@@ -12,6 +12,7 @@ import org.apache.jena.rdf.model.Resource;
 import app.service.darksky.DarkSkyMeasurements;
 import app.service.solcast.SolcastMeasurements;
 
+import java.awt.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -29,7 +30,7 @@ public class OntologyDataCreation {
     static final String BASE_URI6 = "http://www.w3.org/ns/ssn/";
     static final String BASE_URI7 = "http://ecoinformatics.org/oboe/oboe.1.2/oboe-standards.owl#";
     private final String path = "src/main/files/";
-    private final String path_out = "";
+    private final String path_out = "C:\\";
 
     public OntologyDataCreation(OntModel ontModel) {
         this.ontModel = ontModel;
@@ -39,55 +40,46 @@ public class OntologyDataCreation {
     public Model writeOntology() throws IOException {
         //metodo para criar a nova ontologia, apos a criacao de instancias pelos metodos abaixo
 
-        //OutputStream out = new FileOutputStream(path + "\\oboe_wcm_integrated.rdf");
-        OutputStream out = new FileOutputStream("\\oboe_wcm_integrated.rdf");
+        OutputStream out = new FileOutputStream(path_out + "\\oboe_wcm_integrated.rdf");
+        //OutputStream out = new FileOutputStream("\\oboe_wcm_integrated.rdf");
         Model finalOntology = ontModel.write(out, "RDF/XML-ABBREV");
         out.close();
-        System.out.println(finalOntology.toString());
+        //System.out.println("FINAL ONTOLOGY: " + finalOntology.toString());
         return finalOntology;
     }
 
-    private static OntModel createInstanceDarkSky(OntModel ontModel) throws IOException {
+  /*  public static void createInstanceDarkSky() throws IOException {
 
         //Individuo da classe Entity de nome DarkSky
         OntClass darkSkyClass = ontModel.getOntClass(BASE_URI3 + "Entity"); //seleciona a classe Entity
-        System.out.println("darkSkyClass: " + darkSkyClass);
-        Individual darkSkyIndividual = darkSkyClass.createIndividual(BASE_URI1 + "DarkSKy"); // nome da instancia
-        System.out.println("darkSkyIndividual: " + darkSkyIndividual);
+        Individual darkSkyIndividual = darkSkyClass.createIndividual(BASE_URI4 + "DarkSky"); // nome da instancia
+        //System.out.println("darkSkyIndividual: " + darkSkyIndividual);
 
         //Individuo da classe Observation
         OntClass observationClass = ontModel.getOntClass(BASE_URI3 + "Observation");
-        System.out.println(observationClass);
-        Individual observationIndividual = observationClass.createIndividual(BASE_URI1 + "Observation");
-        System.out.println(observationIndividual);
+        Individual observationIndividual = observationClass.createIndividual(BASE_URI4 + "Observation");
 
         //Recuperar object properties ja existentes na ontologia
         ObjectProperty ofEntity = ontModel.getObjectProperty(BASE_URI3 + "ofEntity");
-        System.out.println(ofEntity);
         ObjectProperty hasMeasurement = ontModel.getObjectProperty(BASE_URI3 + "hasMeasurement");
-        System.out.println(hasMeasurement);
         ObjectProperty hasValue = ontModel.getObjectProperty(BASE_URI3 + "hasValue");
-        System.out.println(hasValue);
         ObjectProperty ofCharacteristic = ontModel.getObjectProperty(BASE_URI3 + "ofCharacteristic");
-        System.out.println(ofCharacteristic);
 
         //Data property ja existentes na ontologia
         DatatypeProperty hasCode = ontModel.getDatatypeProperty(BASE_URI3 + "hasCode");
-        System.out.println(hasCode);
 
         //fazer o link entre darksky e observation atraves da object property ofEntity
         Resource ofEntityLink = observationIndividual.addProperty(ofEntity, darkSkyIndividual);
 
-        ArrayList<String[]> measurements;
-        measurements = DarkSkyMeasurements.getMeasurements();
+        ArrayList<String[]> measurements = DarkSkyMeasurements.getMeasurements();
 
-        for (int i = 0; i < measurements.size(); i++) {
+        for (int i = 1; i < measurements.size(); i++) {
 
             // vetor de Individual para armazenar as instancias da ontologia
-            Individual[] population = new Individual[5];
+            Individual[] population = new Individual[11];
 
             // vetor de Resources para guardar as relacoes entre instancias
-            Resource[] links = new Resource[6];
+            Resource[] links = new Resource[12];
 
             //nome da propriedade sendo medida
             String name = measurements.get(i)[0];
@@ -122,20 +114,30 @@ public class OntologyDataCreation {
             Individual measuredCharacteristicIndividual = measuredCharacteristicClass.createIndividual(BASE_URI1 + "MeasuredCharacteristic" + name);
             population[2] = measuredCharacteristicIndividual;
 
+            for (Individual individual: population) {
+                System.out.println(individual);
+            }
+
             //link entre Measurement e MeasuredCharacteristic
             Resource ofCharacteristicLink = measurementIndividual.addProperty(ofCharacteristic, measuredCharacteristicIndividual);
             links[3] = ofCharacteristicLink;
 
             //Specific domain
             OntClass specificDomainClass = ontModel.getOntClass(BASE_URI2 + name);
+            System.out.println("specificDomainClass: " + specificDomainClass);
             Individual specificDomainIndividual = specificDomainClass.createIndividual(BASE_URI1 + name);
+            System.out.println("specificDomainIndividual: " + specificDomainIndividual);
             population[3] = specificDomainIndividual;
 
+
             //object property do specific domain
-            ObjectProperty hasSpecificDomain = ontModel.getObjectProperty(BASE_URI1 + "has" + name);
+            //ObjectProperty hasSpecificDomain = ontModel.getObjectProperty(BASE_URI1 + "has" + name);
+            ObjectProperty hasSpecificDomain = ontModel.createObjectProperty(BASE_URI4 + "has" + name);
+            System.out.println("hasSpecificDomain: " + hasSpecificDomain);
 
             //link entre Measurement e Specific domain
             Resource hasSpecificDomainLink = measurementIndividual.addProperty(hasSpecificDomain, specificDomainIndividual);
+            System.out.println("hasSpecificDomainLink: " + hasSpecificDomainLink);
             links[4] = hasSpecificDomainLink;
 
             for (Resource link : links) {
@@ -171,19 +173,290 @@ public class OntologyDataCreation {
             standard.createIndividualAndLink(measurementIndividual);
         }
 
-        return ontModel;
-    }
+    }*/
 
+
+    public void createInstanceDarkSky() throws IOException {
+
+        OntClass entityClass = ontModel.getOntClass(BASE_URI3 + "Entity");
+        Individual darkskyIndividual = entityClass.createIndividual(BASE_URI4 + "DarkSky");
+
+        OntClass observationClass = ontModel.getOntClass(BASE_URI3 + "Observation");
+        Individual observationIndividual = observationClass.createIndividual(BASE_URI4 + "ObservationDarkSky");
+
+        // recuperar as object properties
+        ObjectProperty ofEntity = ontModel.getObjectProperty(BASE_URI3 + "ofEntity");
+        ObjectProperty ofCharacteristic = ontModel.getObjectProperty(BASE_URI3 + "ofCharacteristic");
+        ObjectProperty hasMeasurement = ontModel.getObjectProperty(BASE_URI3 + "hasMeasurement");
+        ObjectProperty hasValue = ontModel.getObjectProperty(BASE_URI3 + "hasValue");
+        ObjectProperty usesStandard = ontModel.getObjectProperty(BASE_URI3 + "usesStandard");
+        ObjectProperty madeBySensor = ontModel.getObjectProperty(BASE_URI5 + "madeBySensor");
+        ObjectProperty hasOperatingProperty = ontModel.getObjectProperty(BASE_URI4 + "hasOperatingProperty");
+
+
+        // sensores
+        OntClass sensorClass = ontModel.getOntClass(BASE_URI5 + "Sensor");
+        Individual rainGaugeIndividual = sensorClass.createIndividual(BASE_URI4 + "RainGauge");
+        Individual thermometerIndividual = sensorClass.createIndividual(BASE_URI4 + "Thermometer");
+        Individual hygrometerIndividual = sensorClass.createIndividual(BASE_URI4 + "Hygrometer");
+        Individual barometerIndividual = sensorClass.createIndividual(BASE_URI4 + "Barometer");
+        Individual anemometerIndividual = sensorClass.createIndividual(BASE_URI4 + "Anemometer");
+        Individual satelliteImageryIndividual = sensorClass.createIndividual(BASE_URI4 + "SatelliteImagery");
+        Individual visibilitySensorIndividual = sensorClass.createIndividual(BASE_URI4 + "VisibilitySensor");
+        Individual dobsonSpectrophotometerIndividual = sensorClass.createIndividual(BASE_URI4 + "DobsonSpectrophotometer");
+
+        // sensor property
+        OntClass operatingPropertyClass = ontModel.getOntClass(BASE_URI4 + "SensorProperty");
+        Individual accuracyIndividual = operatingPropertyClass.createIndividual(BASE_URI4 + "Accuracy");
+        Individual resolutionIndividual = operatingPropertyClass.createIndividual(BASE_URI4 + "Resolution");
+        Individual maximumIntensityIndividual = operatingPropertyClass.createIndividual(BASE_URI4 + "MaximumIntensity");
+
+
+       /* // sensor property standard
+        OntClass celsiusClass = ontModel.getOntClass(BASE_URI7 + "Celsius");
+        Individual celsiusStandard = celsiusClass.createIndividual("Celsius");
+        OntClass millimeterPerHourClass = ontModel.createClass(BASE_URI4 + "MillimeterPerHour");
+        Individual millimeterPerHourIndividual = millimeterPerHourClass.createIndividual(BASE_URI4 + "MillimeterPerHour");*/
+
+        // characteristics
+        OntClass precipitationIntensityClass = ontModel.createClass(BASE_URI4 + "PrecipitationIntensity");
+        Individual precipitationIntensityIndividual = precipitationIntensityClass.createIndividual(BASE_URI4 + "PrecipitationIntensity");
+        OntClass precipitationProbabilityClass = ontModel.createClass(BASE_URI4 + "PrecipitationProbability");
+        Individual precipitationProbabilityIndividual = precipitationProbabilityClass.createIndividual(BASE_URI4 + "PrecipitationProbability");
+        OntClass temperatureClass = ontModel.createClass(BASE_URI4 + "Temperature");
+        Individual temperatureIndividual = temperatureClass.createIndividual(BASE_URI4 + "Temperature");
+        OntClass apparentTemperatureClass = ontModel.createClass(BASE_URI4 + "ApparentTemperature");
+        Individual apparentTemperatureIndividual = apparentTemperatureClass.createIndividual(BASE_URI4 + "ApparentTemperature");
+        OntClass dewPointClass = ontModel.createClass(BASE_URI4 + "DewPoint");
+        Individual dewPointIndividual = dewPointClass.createIndividual(BASE_URI4 + "DewPoint");
+        OntClass humidityClass = ontModel.createClass(BASE_URI4 + "Humidity");
+        Individual humidityIndividual = humidityClass.createIndividual(BASE_URI4 + "Humidity");
+        OntClass pressureClass = ontModel.createClass(BASE_URI4 + "Pressure");
+        Individual pressureIndividual = pressureClass.createIndividual(BASE_URI4 + "Pressure");
+        OntClass windSpeedClass = ontModel.createClass(BASE_URI4 + "WindSpeed");
+        Individual windSpeedIndividual = windSpeedClass.createIndividual(BASE_URI4 + "WindSpeed");
+        OntClass windGustClass = ontModel.createClass(BASE_URI4 + "WindGust");
+        Individual windGustIndividual = windGustClass.createIndividual(BASE_URI4 + "WindGust");
+        OntClass windBearingClass = ontModel.createClass(BASE_URI4 + "WindBearing");
+        Individual windBearingIndividual = windBearingClass.createIndividual(BASE_URI4 + "WindBearing");
+        OntClass cloudCoverClass = ontModel.createClass(BASE_URI4 + "CloudCover");
+        Individual cloudCoverIndividual = cloudCoverClass.createIndividual(BASE_URI4 + "CloudCover");
+        OntClass uvIndexClass = ontModel.createClass(BASE_URI4 + "UvIndex");
+        Individual uvIndexIndividual = uvIndexClass.createIndividual(BASE_URI4 + "UvIndex");
+        OntClass visibilityClass = ontModel.createClass(BASE_URI4 + "Visibility");
+        Individual visibilityIndividual = visibilityClass.createIndividual(BASE_URI4 + "Visibility");
+        OntClass ozoneClass = ontModel.createClass(BASE_URI4 + "Ozone");
+        Individual ozoneIndividual = ozoneClass.createIndividual(BASE_URI4 + "Ozone");
+
+        //data properties ja existentes na ontologia
+        DatatypeProperty hasCode = ontModel.getDatatypeProperty(BASE_URI3 + "hasCode");
+        DatatypeProperty hasDefinition = ontModel.getDatatypeProperty(BASE_URI4 + "hasDefinition");
+
+        //link entre DarkSky (entity) e Observation
+        Resource ofEntityLink = observationIndividual.addProperty(ofEntity, darkskyIndividual); // Observation ofEntity DarkSky
+
+        ArrayList<String[]> measurements = DarkSkyMeasurements.getMeasurements();
+
+        for (int i = 0; i < measurements.size(); i++) {
+
+            Individual[] population = new Individual[10];
+            Resource[] links = new Resource[10];
+
+            String name = measurements.get(i)[0];
+            String value = measurements.get(i)[1];
+
+            //Measurement
+            OntClass measurementClass = ontModel.getOntClass(BASE_URI3 + "Measurement");
+            Individual measurementIndividual = measurementClass.createIndividual(BASE_URI4 + "Measurement" + name);
+            population[0] = measurementIndividual;
+
+            //link entre Observation e Measurement
+            Resource hasMeasurementLink = observationIndividual.addProperty(hasMeasurement, measurementIndividual);
+            links[0] = hasMeasurementLink;
+
+            //MeasurementValue
+            OntClass measurementValueClass = ontModel.getOntClass(BASE_URI3 + "MeasuredValue");
+            Individual measurementValueIndividual = measurementValueClass.createIndividual(BASE_URI4 + "MeasurementValue" + name);
+            population[1] = measurementValueIndividual;
+
+            //link entre Measurement e MeasurementValue
+            Resource hasValueLink = measurementIndividual.addProperty(hasValue, measurementValueIndividual);
+            links[1] = hasValueLink;
+
+            //associar os valores obtidos na API
+            if (value != null) {
+                Resource hasCodeLink = measurementValueIndividual.addProperty(hasCode, value);
+                links[2] = hasCodeLink;
+            }
+
+            //determinar parametros especificos de cada medicao
+            String standardName = null;
+            String definition = null;
+            Individual sensorIndividual = null;
+            Individual operatingPropertyIndividual = null;
+            Individual operatingPropertyStandardIndividual = null;
+            Individual characteristicIndividual = null;
+            String operatingPropertyValue = null;
+            switch (name) {
+                case "PrecipitationIntensity": {
+                    standardName = "MillimeterPerHour";
+                    definition = "Precipitation intensity is the amount of rain that falls over time. The intensity of rain is measured in the height of the water layer covering the ground in a period of time.";
+                    operatingPropertyValue = "144";
+                    sensorIndividual = rainGaugeIndividual;
+                    characteristicIndividual = precipitationIntensityIndividual;
+                    break;
+                }
+                case "PrecipitationProbability": {
+                    standardName = "Percentage"; //Relative
+                    definition = "Precipitation probability is the forecast of 0.01 in of liquid equivalent precipitation at a specific point over a specific period of time.";
+                    characteristicIndividual = precipitationProbabilityIndividual;
+                    break;
+                }
+                case "InstantaneousTemperature": {
+                    standardName = "Celsius";
+                    sensorIndividual = thermometerIndividual;
+                    definition = "Air temperature is a measure of how hot or cold the air is. More specifically, temperature describes the kinetic energy of the gases that constitute the air." +
+                            "As gas molecules move more quickly, air temperature increases.";
+                    characteristicIndividual = temperatureIndividual;
+                    break;
+                }
+                case "ApparentTemperature": {
+                    standardName = "Celsius";
+                    definition = "Apparent temperature is the temperature equivalent perceived by humans, caused by the combined effects of air temperature, relative humidity, and wind speed.";
+                    characteristicIndividual = apparentTemperatureIndividual;
+                    break;
+                }
+                case "DewPoint": {
+                    standardName = "Celsius";
+                    sensorIndividual = hygrometerIndividual;
+                    definition = "Dew point is the temperature to which air must be cooled to become saturated with water vapour. In other words, dew point is the temperature at which dew form";
+                    operatingPropertyIndividual = accuracyIndividual;
+                    operatingPropertyValue = "0.2";
+                    //operatingPropertyStandardIndividual = celsiusStandard;
+                    characteristicIndividual = dewPointIndividual;
+                    break;
+                }
+                case "Humidity": {
+                    standardName = "Relative";
+                    sensorIndividual = hygrometerIndividual;
+                    definition = "Relative humidity is the ratio of the partial pressure of water vapour to the equilibrium vapour pressure of water at a given temperature. In other words, it is" +
+                            "the amount of moisture in the air compared to what the air can \"hold\" at that temperature. When the air cannot \"hold\" all the moisture, then it condenses as dew.";
+                    characteristicIndividual = humidityIndividual;
+                    break;
+                }
+                case "Pressure": {
+                    standardName = "Hectopascal";
+                    sensorIndividual = barometerIndividual;
+                    definition = "Corresponds to the pressure exerted by the earth's atmosphere at sea level.";
+                    characteristicIndividual = pressureIndividual;
+                    break;
+                }
+                case "WindSpeed": {
+                    standardName = "MeterPerSecond";
+                    sensorIndividual = anemometerIndividual;
+                    definition = "Wind Speed, or wind flow velocity, is a fundamental atmospheric quantity caused by air moving from high to low pressure, usually due to changes in temperature.";
+                    characteristicIndividual = windSpeedIndividual;
+                    break;
+                }
+                case "WindGust": {
+                    standardName = "MeterPerSecond";
+                    sensorIndividual = anemometerIndividual;
+                    definition = "Wind gust is a sudden, brief increase in the speed of the wind. The duration of a gust is usually less than 20 seconds.";
+                    characteristicIndividual = windGustIndividual;
+                    break;
+                }
+                case "WindBearing": {
+                    standardName = "Degree";
+                    sensorIndividual = anemometerIndividual;
+                    definition = "Wind bearing is the direction that the wind is coming from in degrees, with true north at 0" + "\u00b0" + "and progressing clockwise. If wind speed is 0, then this value will not be defined";
+                    characteristicIndividual = windBearingIndividual;
+                    break;
+                }
+                case "CloudCover": {
+                    standardName = "Relative";
+                    sensorIndividual = satelliteImageryIndividual;
+                    definition = "Cloud cover is the fraction of the sky obscured by clouds when observed from a particular location.";
+                    characteristicIndividual = cloudCoverIndividual;
+                    break;
+                }
+                case "UvIndex": {
+                    definition = "UV Index is an international standard measurement of the strength of sunburn-producing ultraviolet (UV) radiation at a particular place and time.";
+                    characteristicIndividual = uvIndexIndividual;
+                    break;
+                }
+                case "Visibility": {
+                    standardName = "Kilometer";
+                    sensorIndividual = visibilitySensorIndividual;
+                    definition = "Visibility is a measure of the distance at which an object or light can be clearly discerned.";
+                    break;
+                }
+                case "Ozone": {
+                    standardName = "Dobson";
+                    sensorIndividual = dobsonSpectrophotometerIndividual;
+                    definition = "Corresponds to the columnar density of total atmospheric ozone at the given time.";
+                    break;
+                }
+
+                default:
+                    break;
+            }
+
+            if (standardName != null) {
+                Standard.createIndividualAndLink(ontModel, standardName, measurementIndividual);
+            }
+
+            //link entre Measurement e hasDefinition
+            if (definition != null) {
+                Resource hasDefinitionLink = measurementIndividual.addProperty(hasDefinition, definition);
+                links[3] = hasDefinitionLink;
+            }
+
+            //link entre measurement e sensor
+            if (sensorIndividual != null) {
+                Resource madeBySensorLink = measurementIndividual.addProperty(madeBySensor, sensorIndividual);
+                links[4] = madeBySensorLink;
+            }
+
+            //link entre measurement e characteristic
+            if (characteristicIndividual != null) {
+                Resource ofCharacteristicLink = measurementIndividual.addProperty(ofCharacteristic, characteristicIndividual);
+                links[5] = ofCharacteristicLink;
+            }
+
+            if (operatingPropertyStandardIndividual != null) {
+                //link entre SensorProperty e Standard
+                Resource usesStandardOperatingPropertyLink = operatingPropertyIndividual.addProperty(usesStandard, operatingPropertyStandardIndividual);
+                links[6] = usesStandardOperatingPropertyLink;
+
+                //link entre SensorProperty e hasCode
+                Resource hasOperatingPropertyCodeLink = operatingPropertyIndividual.addProperty(hasCode, operatingPropertyValue);
+                links[7] = hasOperatingPropertyCodeLink;
+
+                //link entre sensor e operating property
+                Resource hasOperatingPropertyLink = sensorIndividual.addProperty(hasOperatingProperty, operatingPropertyIndividual);
+                links[8] = hasOperatingPropertyLink;
+            }
+
+            /*for (Resource resource : links) {
+                if (resource != null) {
+                    System.out.println(resource.toString());
+                }
+            }*/
+
+
+        }
+
+    }
 
     public void createInstanceSolcast() throws IOException {
 
         //Recuperar a classe Entity - 1 entity com 1 observation
         OntClass entityClass = ontModel.getOntClass(BASE_URI3 + "Entity"); //seleciona a classe Entity
-        System.out.println("entityClass: " + entityClass);
+        //System.out.println("entityClass: " + entityClass);
 
         //Criar o individuo entity de nome Solcast
         Individual solcastIndividual = entityClass.createIndividual(BASE_URI4 + "Solcast"); // nome da instancia
-        System.out.println("solcastIndividual: " + solcastIndividual);
+        //System.out.println("solcastIndividual: " + solcastIndividual);
 
         //Recuperar a classe Observation - 1 observation com varios measurements
         OntClass observationClass = ontModel.getOntClass(BASE_URI3 + "Observation"); //nome da classe
@@ -429,8 +702,7 @@ public class OntologyDataCreation {
             }
 
             if (standardName != null) {
-                Standard standard = new Standard(ontModel, standardName);
-                standard.createIndividualAndLink(measurementIndividual);
+                Standard.createIndividualAndLink(ontModel, standardName, measurementIndividual);
             }
 
             //link entre Measurement e a dataproperty hasDefinition
@@ -485,11 +757,11 @@ public class OntologyDataCreation {
 
             }
 
-            for (Resource resource : links){
-                if (resource!=null){
+            /*for (Resource resource : links) {
+                if (resource != null) {
                     System.out.println(resource.toString());
                 }
-            }
+            }*/
 
         }
 

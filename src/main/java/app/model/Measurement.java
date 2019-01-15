@@ -1,4 +1,4 @@
-package app.model.solcast;
+package app.model;
 
 public class Measurement {
 
@@ -6,6 +6,7 @@ public class Measurement {
     private String standard;
     private Sensor sensor;
     private String definition;
+    private String provider;
 
     public Characteristic getCharacteristic() {
         return characteristic;
@@ -37,5 +38,13 @@ public class Measurement {
 
     public void setDefinition(String definition) {
         this.definition = definition;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
     }
 }

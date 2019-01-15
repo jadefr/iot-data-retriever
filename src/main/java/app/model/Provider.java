@@ -1,10 +1,18 @@
-package app.model.solcast;
+package app.model;
 
 import java.util.List;
 
-public class SolcastBean {
+public class Provider {
+
+    final static String TYPE_SOLCAST = "SOLCAST";
+
+    final static String TYPE_DARKSKY = "DARKSKY";
 
     private List<Measurement> measurements;
+
+    public void setType(String type){
+
+    }
 
     public List<Measurement> getMeasurements() {
         return measurements;
@@ -14,13 +22,4 @@ public class SolcastBean {
         this.measurements = measurements;
     }
 
-    public static String latitude;
-
-    public static String longitude;
-
-
-    /*public SolcastBean(String latitude, String longitude){
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }*/
-}
+  }

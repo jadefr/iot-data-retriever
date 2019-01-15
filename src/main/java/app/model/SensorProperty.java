@@ -1,4 +1,4 @@
-package app.model.solcast;
+package app.model;
 
 public class SensorProperty {
 

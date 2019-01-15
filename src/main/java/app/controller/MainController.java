@@ -1,13 +1,12 @@
 package app.controller;
 
 import app.dao.OntologyAccess;
-import app.dao.SolcastSPARQL;
-import app.model.DataSource;
-import app.model.solcast.Measurement;
-import app.model.solcast.SolcastBean;
-import app.service.solcast.Solcast;
-import app.service.solcast.SolcastGSONWriting;
-import app.service.solcast.SolcastRDFReading;
+import app.dao.SparqlQuerying;
+import app.model.Measurement;
+import app.model.Provider;
+import app.service.RdfReading;
+import app.service.darksky.DarkSkyReading;
+import app.service.GsonWriting;
 import app.service.solcast.SolcastReading;
 import app.util.OntologyDataCreation;
 import com.google.gson.Gson;
@@ -15,26 +14,12 @@ import app.model.DefaultRestResult;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.apache.jena.ontology.OntModel;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import tk.plogitech.darksky.forecast.*;
-import tk.plogitech.darksky.forecast.model.Latitude;
-import tk.plogitech.darksky.forecast.model.Longitude;
 
-import javax.validation.Valid;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 @RestController
 public class MainController {
@@ -57,7 +42,7 @@ public class MainController {
 
 
   /* @GetMapping(value = "/solcastNoCoordinates", produces = "application/json")
-    //public SolcastBean solcast() throws IOException {
+    //public Provider solcast() throws IOException {
     public String solcast() {
         // Init required objects
         Gson gson = new Gson();
@@ -65,8 +50,8 @@ public class MainController {
 
         // WebService Body
         try {
-            SolcastBean solcastBean = new SolcastBean();
-            SolcastGSONWriting solcastGSONWriting = new SolcastGSONWriting();
+            Provider solcastBean = new Provider();
+            GsonWriting solcastGSONWriting = new GsonWriting();
             solcastBean.setMeasurements(solcastGSONWriting.writeGSON());
 
             // Convert solcastBean to json and set it for restResult
@@ -90,30 +75,121 @@ public class MainController {
         Gson gson = new Gson();
         DefaultRestResult restResult = new DefaultRestResult();
 
-         // WebService Body
+        // WebService Body
         try {
 
-            OntologyAccess oa = new OntologyAccess();
-            OntModel om = oa.loadOntologyModelFromUrl("http://datawebhost.com.br/ontologies/merged-wcm.owl");
+            OntModel om = OntologyAccess.loadOntologyModelFromUrl("http://datawebhost.com.br/ontologies/merged-wcm.owl");
             SolcastReading sr = new SolcastReading(latitude, longitude);
             OntologyDataCreation odc = new OntologyDataCreation(om);
             odc.createInstanceSolcast();
             org.apache.jena.rdf.model.Model finalOntology = odc.writeOntology();
-            ArrayList<String> sparqlList = SolcastSPARQL.getSolcastFromOntology(finalOntology);
-            SolcastRDFReading solcastRDFReading = new SolcastRDFReading();
-            solcastRDFReading.writeRDF(sparqlList);
-            List<Measurement> measurementList = SolcastGSONWriting.writeGSON(solcastRDFReading);
-            SolcastBean solcastBean = new SolcastBean();
-            solcastBean.setMeasurements(measurementList);
+            ArrayList<String> sparqlList = SparqlQuerying.getDataFromOntology(finalOntology);
+            RdfReading rdfReading = new RdfReading();
+            rdfReading.writeRDF(sparqlList);
+            List<Measurement> measurementList = GsonWriting.writeGSON(rdfReading);
+            Provider provider = new Provider();
+            provider.setMeasurements(measurementList);
 
-            // Convert solcastBean to json and set it for restResult
-            JsonElement jsonElement = gson.toJsonTree(solcastBean);
+            // Convert provider to json and set it for restResult
+            JsonElement jsonElement = gson.toJsonTree(provider);
             JsonObject jsonObject = (JsonObject) jsonElement;
             restResult.setJsonData(jsonObject);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // Return the object as a json string
+        return gson.toJson(restResult);
+    }
+
+    @RequestMapping(value = "/darksky", method = RequestMethod.GET, produces = "application/json")
+    public String getDarkSky(@RequestParam(value = "latitude", required = true) String latitude,
+                                       @RequestParam(value = "longitude", required = true) String longitude) throws IOException {
+
+        Gson gson = new Gson();
+        DefaultRestResult restResult = new DefaultRestResult();
+
+       // WebService Body
+        try {
+
+            DarkSkyReading dsr = new DarkSkyReading(latitude, longitude);
+            OntModel om = OntologyAccess.loadOntologyModelFromUrl("http://datawebhost.com.br/ontologies/merged-wcm.owl");
+            OntologyDataCreation odc = new OntologyDataCreation(om);
+            odc.createInstanceDarkSky();
+            org.apache.jena.rdf.model.Model finalOntology = odc.writeOntology();
+            System.out.println(finalOntology);
+
+            ArrayList<String> sparqlList = SparqlQuerying.getDarkSkyFromOntology(finalOntology);
+            RdfReading rdfReading = new RdfReading();
+            rdfReading.writeRDF(sparqlList);
+            List<Measurement> measurementList = GsonWriting.writeGSON(rdfReading);
+            Provider provider = new Provider();
+            provider.setMeasurements(measurementList);
+
+
+            // Convert solcastBean to json and set it for restResult
+            JsonElement jsonElement = gson.toJsonTree(provider);
+            JsonObject jsonObject = (JsonObject) jsonElement;
+            restResult.setJsonData(jsonObject);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Return the object as a json string
+        return gson.toJson(restResult);
+    }
+
+
+    @RequestMapping(value = "/getdata", method = RequestMethod.GET, produces = "application/json")
+    public String getData(@RequestParam(value = "providers", required = true) String providers,
+                          @RequestParam(value = "latitude", required = true) String latitude,
+                          @RequestParam(value = "longitude", required = true) String longitude) {
+
+        String[] providersList = providers.split(",");
+        String[] latitudeList = latitude.split(",");
+        String[] longitudeList = longitude.split(",");
+
+       /* for (int i = 0; i < providersList.length; i++) {
+            System.out.println("Processando um Provider e suas coordenadas");
+            System.out.println(providersList[i]);
+            System.out.println(latitudeList[i]);
+            System.out.println(longitudeList[i]);
+        }*/
+
+        Gson gson = new Gson();
+        DefaultRestResult restResult = new DefaultRestResult();
+
+        // WebService Body
+        try {
+
+            OntModel om = OntologyAccess.loadOntologyModelFromUrl("http://datawebhost.com.br/ontologies/merged-wcm.owl");
+            OntologyDataCreation odc = new OntologyDataCreation(om);
+            SolcastReading sr = new SolcastReading(latitudeList[0], longitudeList[0]);
+            odc.createInstanceSolcast();
+            DarkSkyReading dsr = new DarkSkyReading(latitudeList[1], longitudeList[1]);
+            odc.createInstanceDarkSky();
+            org.apache.jena.rdf.model.Model finalOntology = odc.writeOntology();
+            System.out.println(finalOntology);
+
+            ArrayList<String> sparqlList = SparqlQuerying.getDarkSkyFromOntology(finalOntology); //darksky
+            RdfReading rdfReading = new RdfReading();
+            rdfReading.writeRDF(sparqlList);
+            List<Measurement> measurementList = GsonWriting.writeGSON(rdfReading);
+            Provider provider = new Provider();
+            provider.setMeasurements(measurementList);
+
+
+            // Convert solcastBean to json and set it for restResult
+            JsonElement jsonElement = gson.toJsonTree(provider);
+            JsonObject jsonObject = (JsonObject) jsonElement;
+            restResult.setJsonData(jsonObject);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         // Return the object as a json string
         return gson.toJson(restResult);

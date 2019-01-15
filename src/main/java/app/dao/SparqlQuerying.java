@@ -8,16 +8,10 @@ import org.apache.jena.query.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SolcastSPARQL {
+public class SparqlQuerying {
 
-    //private static final String PATH = "C:\\";
-   /* private static Model model;
 
-    public SolcastSPARQL(Model model) {
-        this.model = model;
-    }*/
-
-    public static ArrayList<String> getSolcastFromOntology(Model model) throws IOException {
+    public static ArrayList<String> getDataFromOntology(Model model) throws IOException {
 
         //OntModel ontModel = OntologyAccess.loadOntologyModelFromUrl("http://datawebhost.com.br/ontologies/oboe_wcm_integrated.rdf");
         //OntModel ontModel = OntologyAccess.loadOntologyModel(PATH, "oboe_wcm_integrated.rdf");
@@ -43,6 +37,7 @@ public class SolcastSPARQL {
                 "               ?operatingProperty oboe-core:hasCode ?y.\n" +
                 "               ?operatingRange oboe-core:hasCode ?z}";
 
+
         //Dataset dataset = DatasetFactory.create(ontModel);
         Dataset dataset = DatasetFactory.create(model);
 
@@ -58,7 +53,7 @@ public class SolcastSPARQL {
             String result = null;
             result = next.toString();
             result = result.replace("http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#", "");
-            //System.out.println("reultado do sparql: " + result);
+            System.out.println("reultado do sparql: " + result);
             resultsList.add(result);
         }
 
@@ -66,6 +61,45 @@ public class SolcastSPARQL {
         String resultJson = gson.toJson(resultsList);
         return resultJson;
 */
+        return resultsList;
+    }
+
+    public static ArrayList<String> getDarkSkyFromOntology(Model model) throws IOException {
+
+        String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+                + "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n"
+                + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+                + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
+                + "PREFIX oboe-core: <http://ecoinformatics.org/oboe/oboe.1.2/oboe-core.owl#>\n"
+                + "PREFIX merged-wcm: <http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#>\n"
+                + "PREFIX sosa: <http://www.w3.org/ns/sosa/>\n"
+                + "SELECT ?measurement ?measurementValue ?sensor ?characteristic ?definition ?x ?y ?z ?standard \n"
+                + " 	WHERE { ?measurement oboe-core:hasValue ?measurementValue.\n" +
+                "               ?measurement oboe-core:usesStandard ?standard.\n" +
+                "               ?measurementValue oboe-core:hasCode ?x.\n" +
+                "               ?measurement sosa:madeBySensor ?sensor.\n" +
+                "               ?measurement oboe-core:ofCharacteristic ?characteristic.\n" +
+                "               ?measurement merged-wcm:hasDefinition ?definition}";
+
+        //Dataset dataset = DatasetFactory.create(ontModel);
+        Dataset dataset = DatasetFactory.create(model);
+
+        org.apache.jena.query.Query consulta;
+        consulta = QueryFactory.create(query);// Fazendo o parse da string da consulta e criando o objeto Query
+
+        QueryExecution qexec = QueryExecutionFactory.create(consulta, dataset);// Executando a consulta e obtendo o resultado
+        ResultSet resultado = qexec.execSelect();
+
+        ArrayList<String> resultsList = new ArrayList<>();
+        while (resultado.hasNext()) {
+            QuerySolution next = resultado.next();
+            String result = null;
+            result = next.toString();
+            result = result.replace("http://www.semanticweb.org/jadef/ontologies/2018/8/merged-wcm#", "");
+            System.out.println("reultado do sparql: " + result);
+            resultsList.add(result);
+        }
+
         return resultsList;
     }
 }

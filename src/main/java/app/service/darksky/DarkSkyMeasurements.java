@@ -14,47 +14,63 @@ public class DarkSkyMeasurements {
 
     public static ArrayList<String[]> getMeasurements() throws IOException {
 
-        DarkSky darkSky = DarkSkyJSONReading.readDarkSky();
+        DarkSky darkSky = DarkSkyReading.readDarkSky();
         ArrayList<String[]> measurements = new ArrayList<>(); // guarda o nome e valor do parametro medido
 
         //acessando os atributos (atraves dos getters) do objeto dark sky e adicionando-os na lista de medicoes
-        String[] measurement1 = {"Summary", darkSky.getCurrently().getSummary()};
+        String[] measurement1 = {"PrecipitationIntensity", darkSky.getCurrently().getPrecipIntensity()};
         measurements.add(measurement1);
-        System.out.println(measurements.get(0)[0] + " = " + measurements.get(0)[1]);
+
+        float precipProb = Float.parseFloat(darkSky.getCurrently().getPrecipProbability());
+        String precipProbString = String.valueOf(precipProb * 100);
+        String[] measurement2 = {"PrecipitationProbability", precipProbString};
+        measurements.add(measurement2);
 
         String[] measurement3 = {"InstantaneousTemperature", darkSky.getCurrently().getTemperature()};
         measurements.add(measurement3);
 
-        String[] measurement4 = {"PrecipitationIntensity", darkSky.getCurrently().getPrecipIntensity()};
+        String[] measurement4 = {"ApparentTemperature", darkSky.getCurrently().getApparentTemperature()};
         measurements.add(measurement4);
 
-        float precipProb = Float.parseFloat(darkSky.getCurrently().getPrecipProbability());
-        String precipProbString = String.valueOf(precipProb * 100);
-        String[] measurement5 = {"PrecipitationProbability", precipProbString};
+        String[] measurement5 = {"DewPoint", darkSky.getCurrently().getDewPoint()};
         measurements.add(measurement5);
 
-        String[] measurement6 = {"ApparentTemperature", darkSky.getCurrently().getApparentTemperature()};
+        /*float humidity = Float.parseFloat(darkSky.getCurrently().getHumidity());
+        String humidityString = String.valueOf(humidity * 100);
+        String[] measurement6 = {"Humidity", humidityString};
+        measurements.add(measurement6);*/
+
+        String[] measurement6 = {"Humidity", darkSky.getCurrently().getHumidity()};
         measurements.add(measurement6);
 
-        String[] measurement7 = {"DewPoint", darkSky.getCurrently().getDewPoint()};
+        String[] measurement7 = {"Pressure", darkSky.getCurrently().getPressure()};
         measurements.add(measurement7);
 
-        float humidity = Float.parseFloat(darkSky.getCurrently().getHumidity());
-        String humidityString = String.valueOf(humidity * 100);
-        String[] measurement8 = {"Humidity", humidityString};
+        String[] measurement8 = {"WindSpeed", darkSky.getCurrently().getWindSpeed()};
         measurements.add(measurement8);
 
-        String[] measurement9 = {"WindSpeed", darkSky.getCurrently().getWindSpeed()};
+        String[] measurement9 = {"WindGust", darkSky.getCurrently().getWindGust()};
         measurements.add(measurement9);
 
-        String[] measurement10 = {"WindGust", darkSky.getCurrently().getWindGust()};
+        String[] measurement10 = {"WindBearing", darkSky.getCurrently().getWindBearing()};
         measurements.add(measurement10);
 
-        String[] measurement11 = {"WindBearing", darkSky.getCurrently().getWindBearing()};
+        String[] measurement11 = {"CloudCover", darkSky.getCurrently().getCloudCover()};
         measurements.add(measurement11);
 
-        String[] measurement12 = {"Ozone", darkSky.getCurrently().getOzone()};
+        String[] measurement12 = {"UvIndex", darkSky.getCurrently().getUvIndex()};
         measurements.add(measurement12);
+
+        String[] measurement13 = {"Visibility", darkSky.getCurrently().getVisibility()};
+        measurements.add(measurement13);
+
+        String[] measurement14 = {"Ozone", darkSky.getCurrently().getOzone()};
+        measurements.add(measurement14);
+
+      /*  for (int i = 0; i < measurements.size(); i++){
+            System.out.println(measurements.get(i)[0] + " = " + measurements.get(i)[1]);
+        }*/
+
 
         return measurements;
     }

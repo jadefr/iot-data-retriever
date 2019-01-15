@@ -1,11 +1,9 @@
-package app.service.solcast;
-
-import app.dao.SolcastSPARQL;
+package app.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SolcastRDFReading {
+public class RdfReading {
 
     // private ArrayList solcastList;
 
@@ -69,7 +67,7 @@ public class SolcastRDFReading {
 
 
     public  void writeRDF(ArrayList<String> solcastList) throws IOException {
-        //ArrayList<String> solcastList = ss.getSolcastFromOntology();
+        //ArrayList<String> solcastList = ss.getDataFromOntology();
 
         characteristicNames = new ArrayList<String>();
         characteristicValues = new ArrayList<String>();

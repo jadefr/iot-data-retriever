@@ -5,8 +5,6 @@ classe destinada a recuperar os dados obtidos pela API e nomea-los de acordo com
 pegar os dados da primeira linha somente get(0)
  */
 
-import app.model.solcast.SolcastBean;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
