@@ -4,14 +4,28 @@ import java.util.List;
 
 public class Provider {
 
-    final static String TYPE_SOLCAST = "SOLCAST";
+    private final static String TYPE_SOLCAST = "SOLCAST";
 
-    final static String TYPE_DARKSKY = "DARKSKY";
+    private final static String TYPE_DARKSKY = "DARKSKY";
+
+    public String type;
 
     private List<Measurement> measurements;
 
-    public void setType(String type){
+    public static String getTypeSolcast() {
+        return TYPE_SOLCAST;
+    }
 
+    public static String getTypeDarksky() {
+        return TYPE_DARKSKY;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public List<Measurement> getMeasurements() {

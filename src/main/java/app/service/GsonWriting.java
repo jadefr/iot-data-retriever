@@ -12,23 +12,28 @@ import java.util.List;
 public class GsonWriting {
 
 
-    public static List<Measurement> writeGSON(RdfReading RDFReading) throws IOException {
+    public static List<Measurement> writeGSON(RdfReading rdfReading) throws IOException {
 
         //SparqlQuerying ss = new SparqlQuerying();
         //RdfReading RdfReading = new RdfReading(ss);
 
-        ArrayList<String> characteristicNames = RDFReading.getCharacteristicNames();
-        ArrayList<String> characteristicValues = RDFReading.getCharacteristicValues();
-        ArrayList<String> standards = RDFReading.getStandards();
-        ArrayList<String> sensors = RDFReading.getSensors();
-        ArrayList<String> operatingPropertyNames = RDFReading.getOperatingPropertyNames();
-        ArrayList<String> operatingPropertyStandards = RDFReading.getOperatingPropertyStandards();
-        ArrayList<String> operatingPropertyValues = RDFReading.getOperatingPropertyValues();
-        ArrayList<String> operatingRangeNames = RDFReading.getOperatingRangeNames();
-        ArrayList<String> operatingRangeStandards = RDFReading.getOperatingRangeStandards();
-        ArrayList<String> operatingRangeValues = RDFReading.getOperatingRangeValues();
-        ArrayList<String> definitions = RDFReading.getDefinitions();
+        ArrayList<String> characteristicNames = rdfReading.getCharacteristicNames();
+        ArrayList<String> characteristicValues = rdfReading.getCharacteristicValues();
+        ArrayList<String> standards = rdfReading.getStandards();
+        ArrayList<String> sensors = rdfReading.getSensors();
+        ArrayList<String> operatingPropertyNames = rdfReading.getOperatingPropertyNames();
+        ArrayList<String> operatingPropertyStandards = rdfReading.getOperatingPropertyStandards();
+        ArrayList<String> operatingPropertyValues = rdfReading.getOperatingPropertyValues();
+        ArrayList<String> operatingRangeNames = rdfReading.getOperatingRangeNames();
+        ArrayList<String> operatingRangeStandards = rdfReading.getOperatingRangeStandards();
+        ArrayList<String> operatingRangeValues = rdfReading.getOperatingRangeValues();
+        ArrayList<String> definitions = rdfReading.getDefinitions();
+        ArrayList<String> entities = rdfReading.getEntities();
+        for (String entity: entities){
+            System.out.println(entity);
+        }
 
+        System.out.println(characteristicNames.size());
         List<Measurement> measurementList = new ArrayList<Measurement>();
         for (int i = 0; i < characteristicNames.size(); i++) {
             Measurement measurement = new Measurement();
@@ -39,13 +44,14 @@ public class GsonWriting {
 
             measurement.setStandard(standards.get(i));
             measurement.setDefinition(definitions.get(i));
+            measurement.setProvider(entities.get(i));
 
             characteristic.setName(characteristicNames.get(i));
             //System.out.println(i + " ::: " + characteristicNames.get(i));
             characteristic.setValue(characteristicValues.get(i));
             measurement.setCharacteristic(characteristic);
 
-            if (operatingPropertyNames.size() != 0) {
+            if ((operatingPropertyNames.size() != 0) && (i < operatingPropertyNames.size())) {
                 operatingProperty.setName(operatingPropertyNames.get(i));
                 operatingProperty.setStandard(operatingPropertyStandards.get(i));
                 operatingProperty.setValue(operatingPropertyValues.get(i));

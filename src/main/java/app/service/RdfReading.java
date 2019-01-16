@@ -18,6 +18,7 @@ public class RdfReading {
     private ArrayList<String> operatingRangeStandards;
     private ArrayList<String> operatingRangeValues; //z
     private ArrayList<String> definitions;
+    private ArrayList<String> entities;
 
     public ArrayList<String> getCharacteristicNames() {
         return characteristicNames;
@@ -63,10 +64,11 @@ public class RdfReading {
         return definitions;
     }
 
+    public ArrayList<String> getEntities() {
+        return entities;
+    }
 
-
-
-    public  void writeRDF(ArrayList<String> solcastList) throws IOException {
+    public void writeRDF(ArrayList<String> solcastList) throws IOException {
         //ArrayList<String> solcastList = ss.getDataFromOntology();
 
         characteristicNames = new ArrayList<String>();
@@ -80,6 +82,7 @@ public class RdfReading {
         operatingRangeStandards = new ArrayList<String>();
         operatingRangeValues = new ArrayList<String>();
         definitions = new ArrayList<String>();
+        entities = new ArrayList<String>();
 
         for (String solcastAttribute : solcastList) {
 
@@ -106,6 +109,8 @@ public class RdfReading {
                         operatingRangeNames.add(feature);
                     } else if (attribute.contains("?rangeStandard")) {
                         operatingRangeStandards.add(feature);
+                    }else if (attribute.contains("?entity")) {
+                        entities.add(feature);
                     }
 
                 } else if (attribute.contains("\"")) {

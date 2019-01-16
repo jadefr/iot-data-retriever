@@ -41,33 +41,6 @@ public class MainController {
     }
 
 
-  /* @GetMapping(value = "/solcastNoCoordinates", produces = "application/json")
-    //public Provider solcast() throws IOException {
-    public String solcast() {
-        // Init required objects
-        Gson gson = new Gson();
-        DefaultRestResult restResult = new DefaultRestResult();
-
-        // WebService Body
-        try {
-            Provider solcastBean = new Provider();
-            GsonWriting solcastGSONWriting = new GsonWriting();
-            solcastBean.setMeasurements(solcastGSONWriting.writeGSON());
-
-            // Convert solcastBean to json and set it for restResult
-            JsonElement jsonElement = gson.toJsonTree(solcastBean);
-            JsonObject jsonObject = (JsonObject) jsonElement;
-            restResult.setJsonData(jsonObject);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Return the object as a json string
-        return gson.toJson(restResult);
-    }*/
-
-
     @RequestMapping(value = "/solcast", method = RequestMethod.GET, produces = "application/json")
     public String getDataSourceDetails(@RequestParam(value = "latitude", required = true) String latitude,
                                        @RequestParam(value = "longitude", required = true) String longitude) throws IOException {
@@ -78,12 +51,16 @@ public class MainController {
         // WebService Body
         try {
 
+            Provider solcast = new Provider();
+            solcast.setType("SOLCAST");
             OntModel om = OntologyAccess.loadOntologyModelFromUrl("http://datawebhost.com.br/ontologies/merged-wcm.owl");
             SolcastReading sr = new SolcastReading(latitude, longitude);
             OntologyDataCreation odc = new OntologyDataCreation(om);
             odc.createInstanceSolcast();
             org.apache.jena.rdf.model.Model finalOntology = odc.writeOntology();
-            ArrayList<String> sparqlList = SparqlQuerying.getDataFromOntology(finalOntology);
+
+            SparqlQuerying sparqlQuerying  = new SparqlQuerying();
+            ArrayList<String> sparqlList = sparqlQuerying.getDataFromOntology(finalOntology, solcast);
             RdfReading rdfReading = new RdfReading();
             rdfReading.writeRDF(sparqlList);
             List<Measurement> measurementList = GsonWriting.writeGSON(rdfReading);
@@ -113,6 +90,8 @@ public class MainController {
        // WebService Body
         try {
 
+            Provider darksky = new Provider();
+            darksky.setType("DARKSKY");
             DarkSkyReading dsr = new DarkSkyReading(latitude, longitude);
             OntModel om = OntologyAccess.loadOntologyModelFromUrl("http://datawebhost.com.br/ontologies/merged-wcm.owl");
             OntologyDataCreation odc = new OntologyDataCreation(om);
@@ -120,7 +99,8 @@ public class MainController {
             org.apache.jena.rdf.model.Model finalOntology = odc.writeOntology();
             System.out.println(finalOntology);
 
-            ArrayList<String> sparqlList = SparqlQuerying.getDarkSkyFromOntology(finalOntology);
+            SparqlQuerying sparqlQuerying = new SparqlQuerying();
+            ArrayList<String> sparqlList = sparqlQuerying.getDataFromOntology(finalOntology, darksky);
             RdfReading rdfReading = new RdfReading();
             rdfReading.writeRDF(sparqlList);
             List<Measurement> measurementList = GsonWriting.writeGSON(rdfReading);
@@ -166,14 +146,21 @@ public class MainController {
 
             OntModel om = OntologyAccess.loadOntologyModelFromUrl("http://datawebhost.com.br/ontologies/merged-wcm.owl");
             OntologyDataCreation odc = new OntologyDataCreation(om);
+
+            Provider solcast = new Provider();
+            solcast.setType("SOLCAST");
             SolcastReading sr = new SolcastReading(latitudeList[0], longitudeList[0]);
             odc.createInstanceSolcast();
+
+            Provider darksky = new Provider();
+            darksky.setType("DARKSKY");
             DarkSkyReading dsr = new DarkSkyReading(latitudeList[1], longitudeList[1]);
             odc.createInstanceDarkSky();
-            org.apache.jena.rdf.model.Model finalOntology = odc.writeOntology();
-            System.out.println(finalOntology);
 
-            ArrayList<String> sparqlList = SparqlQuerying.getDarkSkyFromOntology(finalOntology); //darksky
+            org.apache.jena.rdf.model.Model finalOntology = odc.writeOntology();
+
+            SparqlQuerying sparqlQuerying = new SparqlQuerying();
+            ArrayList<String> sparqlList = sparqlQuerying.getDataFromOntology(finalOntology, solcast, darksky);
             RdfReading rdfReading = new RdfReading();
             rdfReading.writeRDF(sparqlList);
             List<Measurement> measurementList = GsonWriting.writeGSON(rdfReading);
