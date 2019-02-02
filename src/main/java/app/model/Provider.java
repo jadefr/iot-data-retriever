@@ -12,14 +12,6 @@ public class Provider {
 
     private List<Measurement> measurements;
 
-    public static String getTypeSolcast() {
-        return TYPE_SOLCAST;
-    }
-
-    public static String getTypeDarksky() {
-        return TYPE_DARKSKY;
-    }
-
     public String getType() {
         return type;
     }

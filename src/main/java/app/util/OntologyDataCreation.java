@@ -44,136 +44,8 @@ public class OntologyDataCreation {
         //OutputStream out = new FileOutputStream("\\oboe_wcm_integrated.rdf");
         Model finalOntology = ontModel.write(out, "RDF/XML-ABBREV");
         out.close();
-        //System.out.println("FINAL ONTOLOGY: " + finalOntology.toString());
         return finalOntology;
     }
-
-  /*  public static void createInstanceDarkSky() throws IOException {
-
-        //Individuo da classe Entity de nome DarkSky
-        OntClass darkSkyClass = ontModel.getOntClass(BASE_URI3 + "Entity"); //seleciona a classe Entity
-        Individual darkSkyIndividual = darkSkyClass.createIndividual(BASE_URI4 + "DarkSky"); // nome da instancia
-        //System.out.println("darkSkyIndividual: " + darkSkyIndividual);
-
-        //Individuo da classe Observation
-        OntClass observationClass = ontModel.getOntClass(BASE_URI3 + "Observation");
-        Individual observationIndividual = observationClass.createIndividual(BASE_URI4 + "Observation");
-
-        //Recuperar object properties ja existentes na ontologia
-        ObjectProperty ofEntity = ontModel.getObjectProperty(BASE_URI3 + "ofEntity");
-        ObjectProperty hasMeasurement = ontModel.getObjectProperty(BASE_URI3 + "hasMeasurement");
-        ObjectProperty hasValue = ontModel.getObjectProperty(BASE_URI3 + "hasValue");
-        ObjectProperty ofCharacteristic = ontModel.getObjectProperty(BASE_URI3 + "ofCharacteristic");
-
-        //Data property ja existentes na ontologia
-        DatatypeProperty hasCode = ontModel.getDatatypeProperty(BASE_URI3 + "hasCode");
-
-        //fazer o link entre darksky e observation atraves da object property ofEntity
-        Resource ofEntityLink = observationIndividual.addProperty(ofEntity, darkSkyIndividual);
-
-        ArrayList<String[]> measurements = DarkSkyMeasurements.getMeasurements();
-
-        for (int i = 1; i < measurements.size(); i++) {
-
-            // vetor de Individual para armazenar as instancias da ontologia
-            Individual[] population = new Individual[11];
-
-            // vetor de Resources para guardar as relacoes entre instancias
-            Resource[] links = new Resource[12];
-
-            //nome da propriedade sendo medida
-            String name = measurements.get(i)[0];
-
-            //valor da propriedade sendo medida
-            String value = measurements.get(i)[1];
-
-            //Measurement
-            OntClass measurementClass = ontModel.getOntClass(BASE_URI3 + "Measurement");
-            Individual measurementIndividual = measurementClass.createIndividual(BASE_URI1 + "Measurement" + name);
-            population[0] = measurementIndividual;
-
-            //link entre Observation e Measurement
-            Resource hasMeasurementLink = observationIndividual.addProperty(hasMeasurement, measurementIndividual);
-            links[0] = hasMeasurementLink;
-
-            //MeasurementValue
-            OntClass measurementValueClass = ontModel.getOntClass(BASE_URI3 + "MeasuredValue");
-            Individual measurementValueIndividual = measurementValueClass.createIndividual(BASE_URI1 + "MeasurementValue" + name);
-            population[1] = measurementValueIndividual;
-
-            //link entre Measurement e MeasurementValue
-            Resource hasValueLink = measurementIndividual.addProperty(hasValue, measurementValueIndividual);
-            links[1] = hasValueLink;
-
-            //Associar os valores obtidos na API
-            Resource hasCodeLink = measurementValueIndividual.addProperty(hasCode, value, XSDDatatype.XSDfloat);
-            links[2] = hasCodeLink;
-
-            //MeasuredCharacteristic
-            OntClass measuredCharacteristicClass = ontModel.getOntClass(BASE_URI3 + "MeasuredCharacteristic");
-            Individual measuredCharacteristicIndividual = measuredCharacteristicClass.createIndividual(BASE_URI1 + "MeasuredCharacteristic" + name);
-            population[2] = measuredCharacteristicIndividual;
-
-            for (Individual individual: population) {
-                System.out.println(individual);
-            }
-
-            //link entre Measurement e MeasuredCharacteristic
-            Resource ofCharacteristicLink = measurementIndividual.addProperty(ofCharacteristic, measuredCharacteristicIndividual);
-            links[3] = ofCharacteristicLink;
-
-            //Specific domain
-            OntClass specificDomainClass = ontModel.getOntClass(BASE_URI2 + name);
-            System.out.println("specificDomainClass: " + specificDomainClass);
-            Individual specificDomainIndividual = specificDomainClass.createIndividual(BASE_URI1 + name);
-            System.out.println("specificDomainIndividual: " + specificDomainIndividual);
-            population[3] = specificDomainIndividual;
-
-
-            //object property do specific domain
-            //ObjectProperty hasSpecificDomain = ontModel.getObjectProperty(BASE_URI1 + "has" + name);
-            ObjectProperty hasSpecificDomain = ontModel.createObjectProperty(BASE_URI4 + "has" + name);
-            System.out.println("hasSpecificDomain: " + hasSpecificDomain);
-
-            //link entre Measurement e Specific domain
-            Resource hasSpecificDomainLink = measurementIndividual.addProperty(hasSpecificDomain, specificDomainIndividual);
-            System.out.println("hasSpecificDomainLink: " + hasSpecificDomainLink);
-            links[4] = hasSpecificDomainLink;
-
-            for (Resource link : links) {
-                System.out.println(link);
-            }
-
-            //Determinar qual a unidade de medicao utilizada
-            String standardName = null;
-            switch (name) {
-                case "Summary": {
-                    standardName = "WeatherDescription";
-                    break;
-                }
-                case "InstantaneousTemperature":
-                case "ApparentTemperature":
-                case "DewPoint": {
-                    standardName = "Celsius";
-                    break;
-                }
-                case "Humidity":
-                case "PrecipitationProbability": {
-                    standardName = "Percentage";
-                    break;
-                }
-                case "Ozone": {
-                    standardName = "Dobson";
-                    break;
-                }
-                default:
-                    break;
-            }
-            Standard standard = new Standard(ontModel, standardName);
-            standard.createIndividualAndLink(measurementIndividual);
-        }
-
-    }*/
 
 
     public void createInstanceDarkSky() throws IOException {
@@ -257,13 +129,13 @@ public class OntologyDataCreation {
 
         ArrayList<String[]> measurements = DarkSkyMeasurements.getMeasurements();
 
-        for (int i = 0; i < measurements.size(); i++) {
+        for (String[] measurement : measurements) {
 
             Individual[] population = new Individual[10];
             Resource[] links = new Resource[10];
 
-            String name = measurements.get(i)[0];
-            String value = measurements.get(i)[1];
+            String name = measurement[0];
+            String value = measurement[1];
 
             //Measurement
             OntClass measurementClass = ontModel.getOntClass(BASE_URI3 + "Measurement");
@@ -310,6 +182,8 @@ public class OntologyDataCreation {
                     standardName = "Percentage"; //Relative
                     definition = "Precipitation probability is the forecast of 0.01 in of liquid equivalent precipitation at a specific point over a specific period of time.";
                     characteristicIndividual = precipitationProbabilityIndividual;
+                    //System.out.println("precipitationProbability measurement: " + measurement);
+                    //System.out.println("precipitationProbabilityIndividual: " + precipitationProbabilityIndividual);
                     break;
                 }
                 case "InstantaneousTemperature": {
@@ -382,17 +256,20 @@ public class OntologyDataCreation {
                 case "UvIndex": {
                     definition = "UV Index is an international standard measurement of the strength of sunburn-producing ultraviolet (UV) radiation at a particular place and time.";
                     characteristicIndividual = uvIndexIndividual;
+                    standardName = "Scalar";
                     break;
                 }
                 case "Visibility": {
                     standardName = "Kilometer";
                     sensorIndividual = visibilitySensorIndividual;
+                    characteristicIndividual = visibilityIndividual;
                     definition = "Visibility is a measure of the distance at which an object or light can be clearly discerned.";
                     break;
                 }
                 case "Ozone": {
                     standardName = "Dobson";
                     sensorIndividual = dobsonSpectrophotometerIndividual;
+                    characteristicIndividual = ozoneIndividual;
                     definition = "Corresponds to the columnar density of total atmospheric ozone at the given time.";
                     break;
                 }
@@ -423,16 +300,17 @@ public class OntologyDataCreation {
                 links[5] = ofCharacteristicLink;
             }
 
-            if (operatingPropertyStandardIndividual != null) {
-                //link entre SensorProperty e Standard
+            if (operatingPropertyIndividual != null) {
+                /*//link entre SensorProperty e Standard
                 Resource usesStandardOperatingPropertyLink = operatingPropertyIndividual.addProperty(usesStandard, operatingPropertyStandardIndividual);
-                links[6] = usesStandardOperatingPropertyLink;
+                links[6] = usesStandardOperatingPropertyLink;*/
 
                 //link entre SensorProperty e hasCode
                 Resource hasOperatingPropertyCodeLink = operatingPropertyIndividual.addProperty(hasCode, operatingPropertyValue);
                 links[7] = hasOperatingPropertyCodeLink;
 
                 //link entre sensor e operating property
+                assert sensorIndividual != null;
                 Resource hasOperatingPropertyLink = sensorIndividual.addProperty(hasOperatingProperty, operatingPropertyIndividual);
                 links[8] = hasOperatingPropertyLink;
             }
@@ -554,7 +432,7 @@ public class OntologyDataCreation {
         ArrayList<String[]> measurements;
         measurements = SolcastMeasurements.getMeasurements();
 
-        for (int i = 0; i < measurements.size(); i++) { // 11 medicoes
+        for (String[] measurement : measurements) { // 11 medicoes
 
             // vetor de Individual para armazenar as instancias da ontologia
             Individual[] population = new Individual[7];
@@ -563,10 +441,10 @@ public class OntologyDataCreation {
             Resource[] links = new Resource[12];
 
             //nome da propriedade sendo medida
-            String name = measurements.get(i)[0];
+            String name = measurement[0];
 
             //valor da propriedade sendo medida
-            String value = measurements.get(i)[1];
+            String value = measurement[1];
 
             //Measurement
             OntClass measurementClass = ontModel.getOntClass(BASE_URI3 + "Measurement");
@@ -700,6 +578,8 @@ public class OntologyDataCreation {
                 sensorIndividual = pyrheliometerIndividual;
                 characteristicIndividual = dni90Individual;
             }
+
+            System.out.println("characteristicIndividual: " + characteristicIndividual);
 
             if (standardName != null) {
                 Standard.createIndividualAndLink(ontModel, standardName, measurementIndividual);

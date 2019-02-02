@@ -60,9 +60,10 @@ public class MainController {
             org.apache.jena.rdf.model.Model finalOntology = odc.writeOntology();
 
             SparqlQuerying sparqlQuerying  = new SparqlQuerying();
-            ArrayList<String> sparqlList = sparqlQuerying.getDataFromOntology(finalOntology, solcast);
+            sparqlQuerying.determineProvider(solcast);
+            ArrayList<String> sparqlList = sparqlQuerying.getResultList(finalOntology);
             RdfReading rdfReading = new RdfReading();
-            rdfReading.writeRDF(sparqlList);
+            rdfReading.readRDF(sparqlList);
             List<Measurement> measurementList = GsonWriting.writeGSON(rdfReading);
             Provider provider = new Provider();
             provider.setMeasurements(measurementList);
@@ -100,9 +101,10 @@ public class MainController {
             System.out.println(finalOntology);
 
             SparqlQuerying sparqlQuerying = new SparqlQuerying();
-            ArrayList<String> sparqlList = sparqlQuerying.getDataFromOntology(finalOntology, darksky);
+            sparqlQuerying.determineProvider(darksky);
+            ArrayList<String> sparqlList = sparqlQuerying.getResultList(finalOntology);
             RdfReading rdfReading = new RdfReading();
-            rdfReading.writeRDF(sparqlList);
+            rdfReading.readRDF(sparqlList);
             List<Measurement> measurementList = GsonWriting.writeGSON(rdfReading);
             Provider provider = new Provider();
             provider.setMeasurements(measurementList);
@@ -131,7 +133,7 @@ public class MainController {
         String[] latitudeList = latitude.split(",");
         String[] longitudeList = longitude.split(",");
 
-       /* for (int i = 0; i < providersList.length; i++) {
+       /*for (int i = 0; i < providersList.length; i++) {
             System.out.println("Processando um Provider e suas coordenadas");
             System.out.println(providersList[i]);
             System.out.println(latitudeList[i]);
@@ -160,9 +162,10 @@ public class MainController {
             org.apache.jena.rdf.model.Model finalOntology = odc.writeOntology();
 
             SparqlQuerying sparqlQuerying = new SparqlQuerying();
-            ArrayList<String> sparqlList = sparqlQuerying.getDataFromOntology(finalOntology, solcast, darksky);
+            sparqlQuerying.determineProvider(darksky,solcast);
+            ArrayList<String> sparqlList = sparqlQuerying.getResultList(finalOntology);
             RdfReading rdfReading = new RdfReading();
-            rdfReading.writeRDF(sparqlList);
+            rdfReading.readRDF(sparqlList);
             List<Measurement> measurementList = GsonWriting.writeGSON(rdfReading);
             Provider provider = new Provider();
             provider.setMeasurements(measurementList);
@@ -181,6 +184,8 @@ public class MainController {
         // Return the object as a json string
         return gson.toJson(restResult);
     }
+
+
 
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {

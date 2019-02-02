@@ -67,8 +67,8 @@ public class DarkSkyMeasurements {
         String[] measurement14 = {"Ozone", darkSky.getCurrently().getOzone()};
         measurements.add(measurement14);
 
-      /*  for (int i = 0; i < measurements.size(); i++){
-            System.out.println(measurements.get(i)[0] + " = " + measurements.get(i)[1]);
+       /* for (String[] measurement : measurements) {
+            System.out.println(measurement[0] + " = " + measurement[1]);
         }*/
 
 

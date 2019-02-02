@@ -20,17 +20,17 @@ public class SolcastMeasurements {
       /*  for (ForecastsIndex fi: forecastsIndices){
             System.out.println(fi.getGhi());
         }*/
-        System.out.println(forecastsIndices.get(0).getGhi());
+        //System.out.println(forecastsIndices.get(0).getGhi());
 
         //GlobalHorizontalIrradianceCenterValue
         String[] measurement1 = {"GlobalHorizontalIrradianceCenterValue", forecastsIndices.get(0).getGhi()};
         measurements.add(measurement1);
-        System.out.println(measurements.get(0)[0] + " = " + measurements.get(0)[1]);
+        //System.out.println(measurements.get(0)[0] + " = " + measurements.get(0)[1]);
 
         //GlobalHorizontalIrradiance10thPercentileValue
         String[] measurement2 = {"GlobalHorizontalIrradiance10thPercentileValue", forecastsIndices.get(0).getGhi10()};
         measurements.add(measurement2);
-        System.out.println(measurements.get(1)[0] + " = " + measurements.get(1)[1]);
+        //System.out.println(measurements.get(1)[0] + " = " + measurements.get(1)[1]);
 
         //GlobalHorizontalIrradiance90thPercentileValue
         String[] measurement3 = {"GlobalHorizontalIrradiance90thPercentileValue", forecastsIndices.get(0).getGhi90()};

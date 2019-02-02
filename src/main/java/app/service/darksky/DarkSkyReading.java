@@ -43,7 +43,7 @@ public class DarkSkyReading {
         DarkSky darkSky = gson.fromJson(data, new TypeToken<DarkSky>() {
         }.getType());
 
-        System.out.println("gson: " + darkSky.toString());
+        //System.out.println("gson: " + darkSky.toString());
         return darkSky;
     }
 

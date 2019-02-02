@@ -8,6 +8,7 @@ import app.model.SensorProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GsonWriting {
 
@@ -18,22 +19,98 @@ public class GsonWriting {
         //RdfReading RdfReading = new RdfReading(ss);
 
         ArrayList<String> characteristicNames = rdfReading.getCharacteristicNames();
-        ArrayList<String> characteristicValues = rdfReading.getCharacteristicValues();
-        ArrayList<String> standards = rdfReading.getStandards();
-        ArrayList<String> sensors = rdfReading.getSensors();
-        ArrayList<String> operatingPropertyNames = rdfReading.getOperatingPropertyNames();
-        ArrayList<String> operatingPropertyStandards = rdfReading.getOperatingPropertyStandards();
-        ArrayList<String> operatingPropertyValues = rdfReading.getOperatingPropertyValues();
-        ArrayList<String> operatingRangeNames = rdfReading.getOperatingRangeNames();
-        ArrayList<String> operatingRangeStandards = rdfReading.getOperatingRangeStandards();
-        ArrayList<String> operatingRangeValues = rdfReading.getOperatingRangeValues();
-        ArrayList<String> definitions = rdfReading.getDefinitions();
-        ArrayList<String> entities = rdfReading.getEntities();
-        for (String entity: entities){
-            System.out.println(entity);
+       /* for (String name : characteristicNames) {
+           System.out.println("characteristic: " + name);
         }
+        System.out.println("characteristicNames.size(): " + characteristicNames.size());
 
-        System.out.println(characteristicNames.size());
+        List<String> characteristicNamesWithoutDuplicates = characteristicNames.stream().distinct().collect(Collectors.toList());
+        for (String name : characteristicNamesWithoutDuplicates) {
+           // System.out.println("characteristicWithoutDuplicates: " + name);
+        }*/
+
+        ArrayList<String> characteristicValues = rdfReading.getCharacteristicValues();
+       /* for (String name : characteristicValues) {
+            System.out.println("characteristicValues: " + name);
+        }
+        System.out.println("characteristicValues.size(): " + characteristicValues.size());*/
+
+
+        //List<String> characteristicValuesWithoutDuplicates = characteristicValues.stream().distinct().collect(Collectors.toList());
+
+        ArrayList<String> standards = rdfReading.getStandards();
+       /* for (String name : standards) {
+            System.out.println("standards: " + name);
+        }
+        System.out.println("standards.size(): " + standards.size());*/
+
+
+        //List<String> standardsWithoutDuplicates = standards.stream().distinct().collect(Collectors.toList());
+
+        ArrayList<String> sensors = rdfReading.getSensors();
+       /* for (String name : sensors) {
+            System.out.println("sensors: " + name);
+        }
+        System.out.println("sensors.size(): " + sensors.size());*/
+
+
+        ArrayList<String> operatingPropertyNames = rdfReading.getOperatingPropertyNames();
+       /*
+ for (String name : operatingPropertyNames) {
+            System.out.println("operatingPropertyNames: " + name);
+        }
+        System.out.println("operatingPropertyNames.size(): " + operatingPropertyNames.size());*/
+
+
+        ArrayList<String> operatingPropertyStandards = rdfReading.getOperatingPropertyStandards();
+        /*
+for (String name : operatingPropertyStandards) {
+            System.out.println("operatingPropertyStandards: " + name);
+        }
+        System.out.println("operatingPropertyStandards.size(): " + operatingPropertyStandards.size());*/
+
+
+        ArrayList<String> operatingPropertyValues = rdfReading.getOperatingPropertyValues();
+      /*  for (String name : operatingPropertyValues) {
+            System.out.println("operatingPropertyValues: " + name);
+        }
+        System.out.println("operatingPropertyValues.size(): " + operatingPropertyValues.size());*/
+
+
+        ArrayList<String> operatingRangeNames = rdfReading.getOperatingRangeNames();
+       /* for (String name : operatingRangeNames) {
+            System.out.println("operatingRangeNames: " + name);
+        }
+        System.out.println("operatingRangeNames.size(): " + operatingRangeNames.size());*/
+
+
+        ArrayList<String> operatingRangeStandards = rdfReading.getOperatingRangeStandards();
+      /*  for (String name : operatingRangeStandards) {
+           System.out.println("operatingRangeStandards: " + name);
+        }
+        System.out.println("operatingRangeStandards.size(): " + operatingRangeStandards.size());*/
+
+
+        ArrayList<String> operatingRangeValues = rdfReading.getOperatingRangeValues();
+        /*for (String name : operatingRangeValues) {
+           System.out.println("operatingRangeValues: " + name);
+        }
+        System.out.println("operatingRangeValues.size(): " + operatingRangeValues.size());*/
+
+
+        ArrayList<String> definitions = rdfReading.getDefinitions();
+     /*   for (String name : definitions) {
+            System.out.println("definitions: " + name);
+        }
+        System.out.println("definitions.size(): " + definitions.size());*/
+
+        ArrayList<String> entities = rdfReading.getEntities();
+      /*  for (String entity : entities) {
+            System.out.println("entity: " + entity);
+        }
+        System.out.println("entities.size(): " + entities.size());*/
+
+
         List<Measurement> measurementList = new ArrayList<Measurement>();
         for (int i = 0; i < characteristicNames.size(); i++) {
             Measurement measurement = new Measurement();
