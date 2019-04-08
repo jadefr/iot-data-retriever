@@ -170,9 +170,9 @@ public class SparqlQuerying {
             resultList = gatherDataFromDifferentQueries(solcastResultList1, solcastResultList2, darkSkyResultList1, darkSkyResultList2, solcastResultList3);
         }
 
-        for (String result: resultList){
+        /*for (String result: resultList){
             System.out.println("SparqlQueryinResult: " + result);
-        }
+        }*/
         return resultList;
     }
 

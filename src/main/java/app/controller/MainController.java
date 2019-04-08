@@ -2,6 +2,7 @@ package app.controller;
 
 import app.dao.OntologyAccess;
 import app.dao.SparqlQuerying;
+import app.model.IntegratedData;
 import app.model.Measurement;
 import app.model.Provider;
 import app.service.RdfReading;
@@ -42,8 +43,8 @@ public class MainController {
 
 
     @RequestMapping(value = "/solcast", method = RequestMethod.GET, produces = "application/json")
-    public String getDataSourceDetails(@RequestParam(value = "latitude", required = true) String latitude,
-                                       @RequestParam(value = "longitude", required = true) String longitude) throws IOException {
+    public String getSolcast(@RequestParam(value = "latitude", required = true) String latitude,
+                             @RequestParam(value = "longitude", required = true) String longitude) throws IOException {
 
         Gson gson = new Gson();
         DefaultRestResult restResult = new DefaultRestResult();
@@ -65,11 +66,11 @@ public class MainController {
             RdfReading rdfReading = new RdfReading();
             rdfReading.readRDF(sparqlList);
             List<Measurement> measurementList = GsonWriting.writeGSON(rdfReading);
-            Provider provider = new Provider();
-            provider.setMeasurements(measurementList);
+            IntegratedData integratedData = new IntegratedData();
+            integratedData.setMeasurements(measurementList);
 
             // Convert provider to json and set it for restResult
-            JsonElement jsonElement = gson.toJsonTree(provider);
+            JsonElement jsonElement = gson.toJsonTree(integratedData);
             JsonObject jsonObject = (JsonObject) jsonElement;
             restResult.setJsonData(jsonObject);
 
@@ -106,12 +107,15 @@ public class MainController {
             RdfReading rdfReading = new RdfReading();
             rdfReading.readRDF(sparqlList);
             List<Measurement> measurementList = GsonWriting.writeGSON(rdfReading);
+            IntegratedData integratedData = new IntegratedData();
+            integratedData.setMeasurements(measurementList);
+            /*
             Provider provider = new Provider();
             provider.setMeasurements(measurementList);
-
+            */
 
             // Convert solcastBean to json and set it for restResult
-            JsonElement jsonElement = gson.toJsonTree(provider);
+            JsonElement jsonElement = gson.toJsonTree(integratedData);
             JsonObject jsonObject = (JsonObject) jsonElement;
             restResult.setJsonData(jsonObject);
 
@@ -167,12 +171,12 @@ public class MainController {
             RdfReading rdfReading = new RdfReading();
             rdfReading.readRDF(sparqlList);
             List<Measurement> measurementList = GsonWriting.writeGSON(rdfReading);
-            Provider provider = new Provider();
-            provider.setMeasurements(measurementList);
+            IntegratedData integratedData = new IntegratedData();
+            integratedData.setMeasurements(measurementList);
 
 
             // Convert solcastBean to json and set it for restResult
-            JsonElement jsonElement = gson.toJsonTree(provider);
+            JsonElement jsonElement = gson.toJsonTree(integratedData);
             JsonObject jsonObject = (JsonObject) jsonElement;
             restResult.setJsonData(jsonObject);
 

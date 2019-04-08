@@ -10,22 +10,12 @@ public class Provider {
 
     public String type;
 
-    private List<Measurement> measurements;
-
     public String getType() {
         return type;
     }
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public List<Measurement> getMeasurements() {
-        return measurements;
-    }
-
-    public void setMeasurements(List<Measurement> measurements) {
-        this.measurements = measurements;
     }
 
   }
