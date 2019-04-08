@@ -41,7 +41,8 @@ public class OntologyDataCreation {
         //metodo para criar a nova ontologia, apos a criacao de instancias pelos metodos abaixo
 
         //OutputStream out = new FileOutputStream(path_out + "\\oboe_wcm_integrated.rdf");
-        OutputStream out = new FileOutputStream("/oboe_wcm_integrated.rdf");
+        String home = System.getProperty("user.home");
+        OutputStream out = new FileOutputStream(home + "oboe_wcm_integrated.rdf");
         Model finalOntology = ontModel.write(out, "RDF/XML-ABBREV");
         out.close();
         return finalOntology;
