@@ -29,20 +29,15 @@ public class OntologyDataCreation {
     static final String BASE_URI5 = "http://www.w3.org/ns/sosa/";
     static final String BASE_URI6 = "http://www.w3.org/ns/ssn/";
     static final String BASE_URI7 = "http://ecoinformatics.org/oboe/oboe.1.2/oboe-standards.owl#";
-    private final String path = "src/main/files/";
-    private final String path_out = "C:\\";
 
     public OntologyDataCreation(OntModel ontModel) {
         this.ontModel = ontModel;
     }
 
-
+    //metodo para criar a nova ontologia, apos a criacao de instancias pelos metodos abaixo
     public Model writeOntology() throws IOException {
-        //metodo para criar a nova ontologia, apos a criacao de instancias pelos metodos abaixo
-
-        //OutputStream out = new FileOutputStream(path_out + "\\oboe_wcm_integrated.rdf");
         String home = System.getProperty("user.home");
-        OutputStream out = new FileOutputStream(home + "oboe_wcm_integrated.rdf");
+        OutputStream out = new FileOutputStream(home + "/oboe_wcm_integrated.rdf");
         Model finalOntology = ontModel.write(out, "RDF/XML-ABBREV");
         out.close();
         return finalOntology;
