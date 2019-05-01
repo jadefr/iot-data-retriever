@@ -95,7 +95,7 @@ public class RdfReading {
         entities = new ArrayList<String>();
 
         for (String sparqlLine : sparqlList) {
-            System.out.println("sparqlLine: " + sparqlLine);
+            //System.out.println("sparqlLine: " + sparqlLine);
             String[] attributes = sparqlLine.split("\\) \\(");
             list.add(attributes);
         }
@@ -123,9 +123,9 @@ public class RdfReading {
         ArrayList<String[]> uniqueElementsListStandardized = new ArrayList<>();
         for (String[] attributes : uniqueElementsList) {
 
-            System.out.println("\n" + "\n" + "attributes.length: " + attributes.length);
+            //System.out.println("\n" + "\n" + "attributes.length: " + attributes.length);
             String attributesString = Arrays.toString(attributes);
-            System.out.println("attributesString: " + attributesString);
+            //System.out.println("attributesString: " + attributesString);
             String[] standardizedElements = new String[15];
 
             if (attributes.length == 14 || attributes.length == 15) { // works for the queries of solcast1 and solcast2
@@ -175,9 +175,9 @@ public class RdfReading {
         }
 
 
-        for (String[] attributes : uniqueElementsListStandardized) {
-            System.out.println("uniqueElementsStandardizedToString: " + Arrays.toString(attributes));
-        }
+        /*for (String[] attributes : uniqueElementsListStandardized) {
+            //System.out.println("uniqueElementsStandardizedToString: " + Arrays.toString(attributes));
+        }*/
 
 
         for (String[] attributes : uniqueElementsListStandardized) {

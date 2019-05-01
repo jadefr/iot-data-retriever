@@ -243,7 +243,7 @@ public class OntologyDataCreation {
                 case "WindBearing": {
                     standardName = "Degree";
                     sensorIndividual = anemometerIndividual;
-                    definition = "Wind bearing is the direction that the wind is coming from in degrees, with true north at 0" + "\u00b0" + "and progressing clockwise. If wind speed is 0, then this value will not be defined";
+                    definition = "Wind bearing is the direction that the wind is coming from in degrees, with true north at 0" + "\u00b0" + " and progressing clockwise. If wind speed is 0, then this value will not be defined";
                     characteristicIndividual = windBearingIndividual;
                     break;
                 }
@@ -580,7 +580,7 @@ public class OntologyDataCreation {
                 characteristicIndividual = dni90Individual;
             }
 
-            System.out.println("characteristicIndividual: " + characteristicIndividual);
+            //System.out.println("characteristicIndividual: " + characteristicIndividual);
 
             if (standardName != null) {
                 Standard.createIndividualAndLink(ontModel, standardName, measurementIndividual);

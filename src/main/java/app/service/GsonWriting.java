@@ -8,140 +8,76 @@ import app.model.SensorProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import java.lang.*;
 
 public class GsonWriting {
 
 
     public static List<Measurement> writeGSON(RdfReading rdfReading) throws IOException {
 
-        //SparqlQuerying ss = new SparqlQuerying();
-        //RdfReading RdfReading = new RdfReading(ss);
 
         ArrayList<String> characteristicNames = rdfReading.getCharacteristicNames();
-       /* for (String name : characteristicNames) {
-           System.out.println("characteristic: " + name);
-        }
-        System.out.println("characteristicNames.size(): " + characteristicNames.size());
-
-        List<String> characteristicNamesWithoutDuplicates = characteristicNames.stream().distinct().collect(Collectors.toList());
-        for (String name : characteristicNamesWithoutDuplicates) {
-           // System.out.println("characteristicWithoutDuplicates: " + name);
-        }*/
+        ArrayList<String> characteristicNamesFormatted = formatArrayList(characteristicNames);
 
         ArrayList<String> characteristicValues = rdfReading.getCharacteristicValues();
-       /* for (String name : characteristicValues) {
-            System.out.println("characteristicValues: " + name);
-        }
-        System.out.println("characteristicValues.size(): " + characteristicValues.size());*/
-
-
-        //List<String> characteristicValuesWithoutDuplicates = characteristicValues.stream().distinct().collect(Collectors.toList());
 
         ArrayList<String> standards = rdfReading.getStandards();
-       /* for (String name : standards) {
-            System.out.println("standards: " + name);
-        }
-        System.out.println("standards.size(): " + standards.size());*/
-
-
-        //List<String> standardsWithoutDuplicates = standards.stream().distinct().collect(Collectors.toList());
+        ArrayList<String> standardsFormatted = formatArrayList(standards);
 
         ArrayList<String> sensors = rdfReading.getSensors();
-       /* for (String name : sensors) {
-            System.out.println("sensors: " + name);
-        }
-        System.out.println("sensors.size(): " + sensors.size());*/
-
+        ArrayList<String> sensorsFormatted = formatArrayList(sensors);
 
         ArrayList<String> operatingPropertyNames = rdfReading.getOperatingPropertyNames();
-       /*
- for (String name : operatingPropertyNames) {
-            System.out.println("operatingPropertyNames: " + name);
-        }
-        System.out.println("operatingPropertyNames.size(): " + operatingPropertyNames.size());*/
-
+        ArrayList<String> operatingPropertyNamesFormatted = formatArrayList(operatingPropertyNames);
 
         ArrayList<String> operatingPropertyStandards = rdfReading.getOperatingPropertyStandards();
-        /*
-for (String name : operatingPropertyStandards) {
-            System.out.println("operatingPropertyStandards: " + name);
-        }
-        System.out.println("operatingPropertyStandards.size(): " + operatingPropertyStandards.size());*/
-
 
         ArrayList<String> operatingPropertyValues = rdfReading.getOperatingPropertyValues();
-      /*  for (String name : operatingPropertyValues) {
-            System.out.println("operatingPropertyValues: " + name);
-        }
-        System.out.println("operatingPropertyValues.size(): " + operatingPropertyValues.size());*/
-
 
         ArrayList<String> operatingRangeNames = rdfReading.getOperatingRangeNames();
-       /* for (String name : operatingRangeNames) {
-            System.out.println("operatingRangeNames: " + name);
-        }
-        System.out.println("operatingRangeNames.size(): " + operatingRangeNames.size());*/
-
+        ArrayList<String> operatingRangeNamesFormatted = formatArrayList(operatingRangeNames);
 
         ArrayList<String> operatingRangeStandards = rdfReading.getOperatingRangeStandards();
-      /*  for (String name : operatingRangeStandards) {
-           System.out.println("operatingRangeStandards: " + name);
-        }
-        System.out.println("operatingRangeStandards.size(): " + operatingRangeStandards.size());*/
-
 
         ArrayList<String> operatingRangeValues = rdfReading.getOperatingRangeValues();
-        /*for (String name : operatingRangeValues) {
-           System.out.println("operatingRangeValues: " + name);
-        }
-        System.out.println("operatingRangeValues.size(): " + operatingRangeValues.size());*/
-
 
         ArrayList<String> definitions = rdfReading.getDefinitions();
-     /*   for (String name : definitions) {
-            System.out.println("definitions: " + name);
-        }
-        System.out.println("definitions.size(): " + definitions.size());*/
 
         ArrayList<String> entities = rdfReading.getEntities();
-      /*  for (String entity : entities) {
-            System.out.println("entity: " + entity);
-        }
-        System.out.println("entities.size(): " + entities.size());*/
+        ArrayList<String> entitiesFormatted = formatArrayList(entities);
 
-
-        List<Measurement> measurementList = new ArrayList<Measurement>();
-        for (int i = 0; i < characteristicNames.size(); i++) {
+        List<Measurement> measurementList = new ArrayList<>();
+        for (int i = 0; i < characteristicNamesFormatted.size(); i++) {
             Measurement measurement = new Measurement();
             Characteristic characteristic = new Characteristic();
             Sensor sensor = new Sensor();
             SensorProperty operatingProperty = new SensorProperty();
             SensorProperty operatingRange = new SensorProperty();
 
-            measurement.setStandard(standards.get(i));
+            measurement.setStandard(standardsFormatted.get(i));
             measurement.setDefinition(definitions.get(i));
-            measurement.setProvider(entities.get(i));
+            measurement.setProvider(entitiesFormatted.get(i));
 
-            characteristic.setName(characteristicNames.get(i));
+            characteristic.setName(characteristicNamesFormatted.get(i));
             //System.out.println(i + " ::: " + characteristicNames.get(i));
             characteristic.setValue(characteristicValues.get(i));
             measurement.setCharacteristic(characteristic);
 
-            if ((operatingPropertyNames.size() != 0) && (i < operatingPropertyNames.size())) {
-                operatingProperty.setName(operatingPropertyNames.get(i));
+            if ((operatingPropertyNamesFormatted.size() != 0) && (i < operatingPropertyNamesFormatted.size())) {
+                operatingProperty.setName(operatingPropertyNamesFormatted.get(i));
                 operatingProperty.setStandard(operatingPropertyStandards.get(i));
                 operatingProperty.setValue(operatingPropertyValues.get(i));
 
 
-                operatingRange.setName(operatingRangeNames.get(i));
+                operatingRange.setName(operatingRangeNamesFormatted.get(i));
                 operatingRange.setStandard(operatingRangeStandards.get(i));
                 operatingRange.setValue(operatingRangeValues.get(i));
 
                 sensor.setOperatingProperty(operatingProperty);
                 sensor.setOperatingRange(operatingRange);
             }
-            sensor.setName(sensors.get(i));
+            sensor.setName(sensorsFormatted.get(i));
             measurement.setSensor(sensor);
 
             measurementList.add(i, measurement);
@@ -150,5 +86,108 @@ for (String name : operatingPropertyStandards) {
         return measurementList;
     }
 
+
+    private static List<String> separateSubstrings(String name) {
+
+        // get the positions of upper cases occurrences
+        List<Integer> positionsList = new ArrayList<Integer>();
+        boolean upperCase = false;
+        boolean number = false;
+        char ch;
+
+        for (int i = 0; i < name.length(); i++) {
+            ch = name.charAt(i);
+            upperCase = Character.isUpperCase(ch);
+            number = Character.isDigit(ch);
+
+            if (upperCase) {
+                positionsList.add(i);
+            }
+
+            if (number) {
+                positionsList.add(i);
+                break;
+            }
+        }
+
+
+        // separate the words of the string
+        List<String> substringList = new ArrayList<String>();
+        String substring = "";
+
+        String initialSubstring = name.substring(0, positionsList.get(0));
+        substringList.add(initialSubstring);
+        substringList.add(" ");
+
+        for (int i = 0; i < (positionsList.size() - 1); i++) {
+            //substringList.add(" ");
+            substring = name.substring(positionsList.get(i), positionsList.get(i + 1));
+            substringList.add(substring);
+            substringList.add(" ");
+        }
+        String lastSubstring = name.substring(positionsList.get(positionsList.size() - 1), name.length());
+        substringList.add(lastSubstring);
+
+        return substringList;
+
+    }
+
+    private static String formatNameString(List<String> substringList) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String s : substringList) {
+            stringBuilder.append(s);
+        }
+        String name = stringBuilder.toString();
+
+        // adjust some characteristic names
+        if (name.contains("Percentile")) {
+            name = name.replace("thPercentileValue", "%");
+        }
+
+        // adjust some operating property names
+        if (name.contains("Angle Pyranometer")){
+            name = name.replace(" Pyranometer","");
+        }
+        if (name.contains("Angle Pyrheliometer")){
+            name = name.replace(" Pyrheliometer","");
+        }
+
+        //adjust some sensor names
+        if (name.contains("GHICV")){
+            name = name.replace("GHICV","");
+            System.out.println("replace: " + name);
+        }
+        if (name.contains("DHI")){
+            name = name.replace("DHI","");
+            System.out.println("replace: " + name);
+        }
+
+        String formattedName = name.trim();
+
+        return formattedName;
+    }
+
+    private static ArrayList<String> formatArrayList(ArrayList<String> characteristicNames) {
+
+        List<String> substringList = new ArrayList<>();
+        String formattedName = "";
+        ArrayList<String> characteristicNamesFormatted = new ArrayList<>();
+
+        for (String name : characteristicNames) {
+
+            if (!name.contains("does not ")) {
+
+                substringList = separateSubstrings(name);
+                formattedName = formatNameString(substringList);
+                characteristicNamesFormatted.add(formattedName);
+
+            } else {
+                characteristicNamesFormatted.add("does not apply");
+            }
+        }
+
+        return characteristicNamesFormatted;
+    }
 
 }

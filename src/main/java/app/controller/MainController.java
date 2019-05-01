@@ -42,6 +42,7 @@ public class MainController {
     }
 
 
+    @CrossOrigin
     @RequestMapping(value = "/solcast", method = RequestMethod.GET, produces = "application/json")
     public String getSolcast(@RequestParam(value = "latitude", required = true) String latitude,
                              @RequestParam(value = "longitude", required = true) String longitude) throws IOException {
@@ -82,6 +83,7 @@ public class MainController {
         return gson.toJson(restResult);
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/darksky", method = RequestMethod.GET, produces = "application/json")
     public String getDarkSky(@RequestParam(value = "latitude", required = true) String latitude,
                                        @RequestParam(value = "longitude", required = true) String longitude) throws IOException {
@@ -128,6 +130,7 @@ public class MainController {
     }
 
 
+    @CrossOrigin
     @RequestMapping(value = "/getdata", method = RequestMethod.GET, produces = "application/json")
     public String getData(@RequestParam(value = "providers", required = true) String providers,
                           @RequestParam(value = "latitude", required = true) String latitude,
@@ -189,12 +192,5 @@ public class MainController {
         return gson.toJson(restResult);
     }
 
-
-
-    @GetMapping("/greeting")
-    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "greeting " + name;
-    }
 
 }
