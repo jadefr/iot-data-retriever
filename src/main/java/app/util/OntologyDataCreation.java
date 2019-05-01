@@ -215,7 +215,7 @@ public class OntologyDataCreation {
                     standardName = "Relative";
                     sensorIndividual = hygrometerIndividual;
                     definition = "Relative humidity is the ratio of the partial pressure of water vapour to the equilibrium vapour pressure of water at a given temperature. In other words, it is" +
-                            "the amount of moisture in the air compared to what the air can \"hold\" at that temperature. When the air cannot \"hold\" all the moisture, then it condenses as dew.";
+                            "the amount of moisture in the air compared to what the air can 'hold' at that temperature. When the air cannot 'hold' all the moisture, then it condenses as dew.";
                     characteristicIndividual = humidityIndividual;
                     break;
                 }
