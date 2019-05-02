@@ -154,12 +154,12 @@ public class GsonWriting {
         }
 
         //adjust some sensor names
-        if (name.contains("GHICV")){
-            name = name.replace("GHICV","");
+        if (name.contains("G H I C V")){
+            name = name.replace(" G H I C V","");
             System.out.println("replace: " + name);
         }
-        if (name.contains("DHI")){
-            name = name.replace("DHI","");
+        if (name.contains("D H I")){
+            name = name.replace(" D H I","");
             System.out.println("replace: " + name);
         }
 
