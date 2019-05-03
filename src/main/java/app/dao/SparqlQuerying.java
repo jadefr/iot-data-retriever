@@ -126,7 +126,7 @@ public class SparqlQuerying {
     }
 
 
-    public void determineProvider(Provider... providers) {
+    public void selectQueriesAccordingToProvider(Provider... providers) {
         int providersLength = providers.length;
         if (providersLength == 1) {
             if (providers[0].getType().equals("SOLCAST")) {
